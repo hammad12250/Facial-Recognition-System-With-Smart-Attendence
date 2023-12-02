@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Recognition System with Smart Attendance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #fff;
+            height: calc(100% - 40px); /* Subtract header height */
+            border-bottom: 1px solid #ccc; /* Add border at the bottom of the container */
+        }
+
+        .navigation {
+            width: 250px;
+            background: #444;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            border-right: 1px solid #ccc;
+            margin-right: 20px; /* Add margin between navigation and live-feed */
+        }
+
+        .navigation button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navigation button i {
+            margin-right: 10px;
+        }
+
+        .navigation button:hover {
+            background: #555;
+        }
+
+        .attendance-table {
+            margin-top: 20px;
+            width: 100%;
+            height: 100%; /* Make the table cover the entire height of the container */
+            border-collapse: collapse;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            border: 1px solid #ccc;
+            padding: 20px; /* Increase padding for a larger table */
+            text-align: center;
+            width: 200px;
+        }
+
+        .attendance-table th {
+            background-color: #f2f2f2;
+        }
+        .attendance-table td img {
+        width: 100px; /* Set the width to your desired fixed size */
+        height: 100px; /* Set the height to your desired fixed size */
+    }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Facial Recognition System with Smart Attendance</h1>
+    </div>
+    <div class="container">
+        <div class="navigation">
+            
+          <button><i class="fas fa-user"></i> Home</button>
+          <button><i class="fas fa-user"></i>Profile</button>
+          <button><i class="fas fa-bell"></i> Notifications</button>
+          <button><i class="fas fa-user-clock"></i> Temporary Access</button>
+          <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="attendance-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Location</th> <!-- Add Location field -->
+                        <th>Time</th> <!-- Add Time field -->
+                        <th>Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                            <td>1</td>
+                            <td>Cam 1</td> <!-- Add Location data -->
+                            <td>09:00 AM</td> <!-- Add Time data -->
+                            <td><img src="intruder1.png" alt="Picture 1"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Cam 2</td> <!-- Add Location data -->
+                        <td>02:00 PM</td> <!-- Add Time data -->
+                        <td><img src="intruder 2.jpg" alt="Picture 1"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Cam 3</td> <!-- Add Location data -->
+                        <td>09:450 PM</td> <!-- Add Time data -->
+                        <td><img src="Intruder3.jpg" alt="Picture 1"></td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
