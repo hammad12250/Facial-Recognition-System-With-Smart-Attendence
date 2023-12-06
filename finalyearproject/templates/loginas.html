@@ -1,0 +1,105 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Options</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* Set the background color of the body to white */
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            padding: 40px 0;
+            font-size: 30px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Set z-index to ensure the header appears above other elements */
+        }
+
+        .content {
+            margin-top: 250px; /* Adjust the margin-top to create space between header and content text */
+            text-align: center;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .options-container {
+            display: flex;
+            margin-top: 100px; /* Space between the header and the pictures */
+            justify-content: center; /* Center the options horizontally */
+        }
+
+        .image-button {
+            cursor: pointer;
+            text-decoration: none;
+            color: black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            border: 5px solid black; /* Add a black border around each image button */
+            width: 160px; /* Set a fixed width for each image button */
+            height: 160px; /* Set a fixed height for each image button */
+            overflow: hidden; /* Hide content overflow */
+        }
+
+        .image-button img {
+            width: 100%; /* Make the image fill the container */
+            height: 100%; /* Make the image fill the container */
+            object-fit: cover; /* Ensure the image covers the container */
+        }
+
+        .button-label {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        Facial Recognition System with Smart Attendance
+    </div>
+
+    <body>
+        <div class="header">
+            Facial Recognition System with Smart Attendance
+        </div>
+    
+        <div class="content">
+            Welcome to the Login Portal
+            <div class="options-container">
+                
+                <a href="{% url 'loginasadmin' %}" class="image-button">
+                    <img src="/static/Admin-removebg-preview (1).png"alt="Admin">
+                    <div class="button-label">Login as Admin</div>
+                </a>
+               
+                <a href="{% url 'loginasemployee'%}" class="image-button">
+                    <img src="/static/loginasemployee.jpg"alt="Employee">
+                    <div class="button-label">Login as Employee</div>
+                </a>
+               
+                <a href="{% url 'loginasguard'%}" class="image-button">
+                    <img src="/static/guard.png"alt="Guard">
+                    <div class="button-label">Login as Guard</div>
+                </a>
+            </div>
+        </div>
+    </body>
+
+</html>
+
+
