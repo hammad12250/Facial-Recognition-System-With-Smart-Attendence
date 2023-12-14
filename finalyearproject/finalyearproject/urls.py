@@ -36,6 +36,8 @@ urlpatterns = [
     path('employeeupdate', views.employeeupdate, name='empupdate'),
     path('connect-camera/', connect_camera, name='connect_camera'),
     
+   
+    
 ]
 
 

@@ -81,19 +81,19 @@ WSGI_APPLICATION = 'finalyearproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-<<<<<<< HEAD
+
         'NAME': 'fyp',
         'USER': 'fyp',
         'PASSWORD': 'fyp',
         'HOST': 'localhost',  # Set to the MySQL server host
         'PORT': '3306',  # Set to the MySQL server port
-=======
-        'NAME': 'finalyearproject',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'localhost',
-        'PORT':'3306',
->>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
+# =======
+#         'NAME': 'finalyearproject',
+#         'USER':'root',
+#         'PASSWORD':'',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+# >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
     }
 }
 
@@ -139,3 +139,9 @@ STATICFILES_DIRS = [BASE_DIR, 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}

@@ -1,11 +1,19 @@
-<<<<<<< HEAD
-from django.shortcuts import HttpResponse
+
+
 from django.shortcuts import render, redirect
 from .forms import CameraForm
 from django.contrib import messages
+
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+
+from django.contrib.auth.models import User, Group
+from django.contrib import messages
+
+
+
+
 # camera connect storing data in database
-
-
 def connect_camera(request):
     if request.method == 'POST':
         form = CameraForm(request.POST)
@@ -18,13 +26,12 @@ def connect_camera(request):
 
     return render(request, 'addcamera.html', {'form': form})
 
-=======
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.shortcuts import HttpResponse
-from django.contrib.auth.models import User, Group
-from django.contrib import messages
->>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
+
+
+
+
+
+# >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):

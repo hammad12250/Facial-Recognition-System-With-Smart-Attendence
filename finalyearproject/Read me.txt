@@ -9,3 +9,10 @@ for employee logins
 password hammad
 2)username hadiyet
 password h123
+
+
+
+// create this table in DB with the field too store rtsp value in DB
+
+table name: finalyearproject_camera   
+column: camera_link (var char 255)
