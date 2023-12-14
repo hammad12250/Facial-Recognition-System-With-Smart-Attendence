@@ -60,17 +60,23 @@
 </head>
 
 <body>
+<form method="post" action="{% url 'loginasadmin' %}">
+    {% csrf_token %}
     <div class="login-container">
         <div class="login-label">ID:</div>
-        <input class="login-input" type="text" placeholder="Enter your ID" required><br>
+        <input class="login-input" type="text" name="username" placeholder="Enter your ID" required><br>
         <div class="login-label">Password:</div>
-        <input class="login-input" type="password" placeholder="Enter your password" required><br>
-        <a href="{% url 'adminhomepage'%}">
+        <input class="login-input" type="password" name="password" placeholder="Enter your password" required><br>
+
         <button class="login-button" type="submit">Login</button>
-        </a>
         <a href="Forgetpassword.html">Forgot Password?</a>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
     </div>
-  
+</form>
+
 </body>
 
 </html>

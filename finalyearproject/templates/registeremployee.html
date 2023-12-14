@@ -59,13 +59,20 @@
 </head>
 
 <body>
+    <!-- Add the action and method attributes to the form -->
+<form id="generateAccountForm" action="{% url 'registeremp' %}" method="post">
+    {% csrf_token %}
     <div class="forgot-password-container">
         <div class="forgot-password-label">ID:</div>
-        <input class="forgot-password-input" type="text" placeholder="Enter ID" required><br>
+        <input name="username" class="forgot-password-input" type="text" placeholder="Enter ID" required><br>
         <div class="forgot-password-label">Password:</div>
-        <input class="forgot-password-input" type="text" placeholder="Password" required><br>
+        <input name="password" class="forgot-password-input" type="password" placeholder="Password" required><br>
         <button class="forgot-password-button" type="submit">Generate</button>
     </div>
+</form>
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
 </body>
 
 </html>
