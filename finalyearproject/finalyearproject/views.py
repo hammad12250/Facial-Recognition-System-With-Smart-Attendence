@@ -1,5 +1,22 @@
-from django.shortcuts import render
 from django.shortcuts import HttpResponse
+from django.shortcuts import render, redirect
+from .forms import CameraForm
+from django.contrib import messages
+# camera connect storing data in database
+
+
+def connect_camera(request):
+    if request.method == 'POST':
+        form = CameraForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Camera successfully connected.')
+            return redirect('connect_camera')  # Redirect to the same page to display the success message
+    else:
+        form = CameraForm()
+
+    return render(request, 'addcamera.html', {'form': form})
+
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):

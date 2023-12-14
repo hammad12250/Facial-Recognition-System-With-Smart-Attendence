@@ -127,7 +127,7 @@
             <button><i class="fas fa-address-book"></i> Add Person</button>
             <button><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
-        <div class="content">
+        {% comment %} <div class="content">
             <form action="#" method="post">
                 <label for="cameraLink" class="camera-input">Camera Link:</label>
                 <input type="text" id="cameraLink" name="cameraLink" placeholder="rtsp://username:password@ip_address:port/cam/realmonitor?channel=1&subtype=0
@@ -135,8 +135,22 @@
 
                 <input type="submit" class="connect-button" value="Connect">
             </form>
+        </div> {% endcomment %}
+
+        <div class="content">
+            {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+            {% endif %}
+            <form method="post" action="{% url 'connect_camera' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="connect-button" value="Connect">
+            </form>
         </div>
-    </div>
 </body>
 
 </html>
