@@ -1,30 +1,9 @@
-<<<<<<< HEAD
-from django.shortcuts import HttpResponse
-from django.shortcuts import render, redirect
-from .forms import CameraForm
-from django.contrib import messages
-# camera connect storing data in database
-
-
-def connect_camera(request):
-    if request.method == 'POST':
-        form = CameraForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Camera successfully connected.')
-            return redirect('connect_camera')  # Redirect to the same page to display the success message
-    else:
-        form = CameraForm()
-
-    return render(request, 'addcamera.html', {'form': form})
-
-=======
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponse
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
->>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
+from .models import RtspCamera
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -58,7 +37,12 @@ def loginasguard(request):
 def adminhomepage(request):
     return render(request,'adminhome.html')
 def addcamerapage(request):
-    return render(request,'addcamera.html')
+    success_message = None
+    if request.method == 'POST':
+        camera_link = request.POST.get('cameraLink')
+        RtspCamera.objects.create(camera_link=camera_link)
+        success_message = "Camera link added successfully!"
+    return render(request, 'addcamera.html', {'success_message': success_message})
 def attendancereportbyadmin(request):
     return render(request,'attendancereport.html')
 def registeraccounts(request):

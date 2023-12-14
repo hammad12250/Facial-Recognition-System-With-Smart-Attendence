@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import connect_camera
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('', views.loginoptions, name='loginoptions'),
@@ -34,8 +33,6 @@ urlpatterns = [
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
-    path('connect-camera/', connect_camera, name='connect_camera'),
-    
 ]
 
 

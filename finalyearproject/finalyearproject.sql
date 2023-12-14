@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 08:51 AM
+-- Generation Time: Dec 14, 2023 at 01:16 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -92,7 +92,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (21, 'Can add session', 6, 'add_session'),
 (22, 'Can change session', 6, 'change_session'),
 (23, 'Can delete session', 6, 'delete_session'),
-(24, 'Can view session', 6, 'view_session');
+(24, 'Can view session', 6, 'view_session'),
+(25, 'Can add rtsp camera', 7, 'add_rtspcamera'),
+(26, 'Can change rtsp camera', 7, 'change_rtspcamera'),
+(27, 'Can delete rtsp camera', 7, 'delete_rtspcamera'),
+(28, 'Can view rtsp camera', 7, 'view_rtspcamera');
 
 -- --------------------------------------------------------
 
@@ -119,7 +123,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-13 13:22:44.841374', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-14 12:10:01.041729', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
 (6, 'pbkdf2_sha256$600000$MFjaOFaqunBKqynLEb721T$fGdEImoXdsLlvl9wajKdm39YMLlazvZsb61egeC3QK4=', NULL, 0, 'Hammad123', '', '', '', 0, 1, '2023-12-13 12:41:06.778864'),
 (8, 'pbkdf2_sha256$600000$9F3EctWpN0p9DSekGNdVzJ$Jsz1qCfZvmG+9kPUh1JKctJ4nv/P1X5abFS/JxxXPA8=', '2023-12-13 13:11:51.664428', 0, 'Hammad12', '', '', '', 0, 1, '2023-12-13 12:44:47.099162'),
 (9, 'pbkdf2_sha256$600000$P0hMO3bnVC2FlNesY2yWWS$VMqxP0fE5QCyIm9Dw7sK6ymr2NAwkRxL2Wx+W1nadF4=', '2023-12-13 13:10:51.122026', 0, 'Ali', '', '', '', 0, 1, '2023-12-13 13:09:34.518165'),
@@ -205,6 +209,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(7, 'finalyearproject', 'rtspcamera'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -242,7 +247,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (15, 'auth', '0010_alter_group_name_max_length', '2023-12-12 10:13:11.347020'),
 (16, 'auth', '0011_update_proxy_permissions', '2023-12-12 10:13:11.763175'),
 (17, 'auth', '0012_alter_user_first_name_max_length', '2023-12-12 10:13:12.096615'),
-(18, 'sessions', '0001_initial', '2023-12-12 10:13:13.770033');
+(18, 'sessions', '0001_initial', '2023-12-12 10:13:13.770033'),
+(19, 'finalyearproject', '0001_initial', '2023-12-14 11:59:35.388692');
 
 -- --------------------------------------------------------
 
@@ -262,7 +268,18 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
-('89rje0ebb9nilpmma5gtvlyd4zwsryp4', '.eJxVjMEOgjAQRP-lZ9PslhaoR-98Q7PbLRY1JaFwMv67kHDQ22Tem3mrQNuaw1bTEiZRV4WgLr8lU3ymchB5ULnPOs5lXSbWh6JPWvUwS3rdTvfvIFPN-9oxeHKCHjjtwaIxtuNGWKKzDbcjoEsWhcjCaGLsEaHrW8_YjQ06pz5f_kE3hQ:1rDPDk:Dwm69BLTnZL-Y6M24ATONWxfsu3XlEIW9F65KBf6lbU', '2023-12-27 13:24:16.163052');
+('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rDkXR:G-NAooKyQJKi7OmbgiSwBrknv4q_FJEewiASAmM_Rsc', '2023-12-28 12:10:01.253255');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finalyearproject_rtspcamera`
+--
+
+CREATE TABLE `finalyearproject_rtspcamera` (
+  `id` bigint(20) NOT NULL,
+  `camera_link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -342,6 +359,12 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `finalyearproject_rtspcamera`
+--
+ALTER TABLE `finalyearproject_rtspcamera`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -361,7 +384,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -391,13 +414,19 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `finalyearproject_rtspcamera`
+--
+ALTER TABLE `finalyearproject_rtspcamera`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
