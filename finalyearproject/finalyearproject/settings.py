@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,6 +49,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'finalyearproject.urls'
@@ -77,11 +81,19 @@ WSGI_APPLICATION = 'finalyearproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
+<<<<<<< HEAD
         'NAME': 'fyp',
         'USER': 'fyp',
         'PASSWORD': 'fyp',
         'HOST': 'localhost',  # Set to the MySQL server host
         'PORT': '3306',  # Set to the MySQL server port
+=======
+        'NAME': 'finalyearproject',
+        'USER':'root',
+        'PASSWORD':'',
+        'HOST':'localhost',
+        'PORT':'3306',
+>>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
     }
 }
 

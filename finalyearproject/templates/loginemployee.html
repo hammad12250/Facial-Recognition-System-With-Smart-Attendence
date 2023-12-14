@@ -60,17 +60,20 @@
 </head>
 
 <body>
-    <div class="login-container">
-        <div class="login-label">ID:</div>
-        <input class="login-input" type="text" placeholder="Enter your ID" required><br>
-        <div class="login-label">Password:</div>
-        <input class="login-input" type="password" placeholder="Enter your password" required><br>
-        <a href="{% url 'emphome'%}">
-        <button class="login-button" type="submit">Login</button>
-        <a/>
-        <a href="Forgetpassword.html">Forgot Password?</a>
-    </div>
-  
+    <form id="employeeLoginForm" action="{% url 'loginasemployee' %}" method="post">
+        {% csrf_token %}
+        <div class="login-container">
+            <div class="login-label">ID:</div>
+            <input name="username" class="login-input" type="text" placeholder="Enter your ID" required><br>
+            <div class="login-label">Password:</div>
+            <input name="password" class="login-input" type="password" placeholder="Enter your password" required><br>
+            <button class="login-button" type="submit">Login</button>
+            <a href="Forgetpassword.html">Forgot Password?</a>
+            {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+        </div>
+    </form>
 </body>
 
 </html>
