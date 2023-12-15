@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from . import views
-from .views import connect_camera
+from . import views 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('', views.loginoptions, name='loginoptions'),
@@ -34,10 +34,14 @@ urlpatterns = [
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
-    path('connect-camera/', connect_camera, name='connect_camera'),
+# <<<<<<< HEAD
+    path('connect-camera/', views.connect_camera, name='connect_camera'),
+   path('', views.index, name='index'),
+ 
+	path('livecam_feed', views.livecam_feed, name='livecam_feed'),
     
-   
-    
+# =======
+# >>>>>>> 17061208419e3c5f98276d9d37d7c4fceac65be7
 ]
 
 

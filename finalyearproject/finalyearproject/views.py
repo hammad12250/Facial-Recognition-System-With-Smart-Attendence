@@ -1,3 +1,4 @@
+# <<<<<<< HEAD
 
 
 from django.shortcuts import render, redirect
@@ -6,11 +7,17 @@ from django.contrib import messages
 
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
+from django.http.response import StreamingHttpResponse
+from django.shortcuts import render
+from django.http import StreamingHttpResponse
+from finalyearproject.camera import LiveWebCam
+from django.shortcuts import render
 
-
+def index(request):
+    # Your view logic here
+    return render(request, 'adminhome.html')
 
 
 # camera connect storing data in database
@@ -27,11 +34,25 @@ def connect_camera(request):
     return render(request, 'addcamera.html', {'form': form})
 
 
-
-
-
+# camera connection starts from here 
+def gen(camera):
+	while True:
+		frame = camera.get_frame()
+		yield (b'--frame\r\n'
+				b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+def livecam_feed(request):
+	return StreamingHttpResponse(gen(LiveWebCam()),
+					content_type='multipart/x-mixed-replace; boundary=frame')
 
 # >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
+# =======
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.shortcuts import HttpResponse
+from django.contrib.auth.models import User, Group
+from django.contrib import messages
+from .models import RtspCamera
+# >>>>>>> 17061208419e3c5f98276d9d37d7c4fceac65be7
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -65,7 +86,12 @@ def loginasguard(request):
 def adminhomepage(request):
     return render(request,'adminhome.html')
 def addcamerapage(request):
-    return render(request,'addcamera.html')
+    success_message = None
+    if request.method == 'POST':
+        camera_link = request.POST.get('cameraLink')
+        RtspCamera.objects.create(camera_link=camera_link)
+        success_message = "Camera link added successfully!"
+    return render(request, 'addcamera.html', {'success_message': success_message})
 def attendancereportbyadmin(request):
     return render(request,'attendancereport.html')
 def registeraccounts(request):
