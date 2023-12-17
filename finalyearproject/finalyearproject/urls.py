@@ -33,7 +33,6 @@ urlpatterns = [
     path('registeraccount', views.registeraccounts, name='registeracc'),
     path('registeremployee', views.regemployee, name='registeremp'),
     path('addperson', views.addperson, name='addper'),
-    path('addemployee', views.addemployee, name='addemp'),
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
@@ -42,8 +41,8 @@ urlpatterns = [
    path('', views.index, name='index'),
 
 	path('livecam_feed', views.livecam_feed, name='livecam_feed'),
-    path('employee_list/', employee_list, name='employee_list'),
-    path('add_employee/', add_employee, name='add_employee'),
+    path('employee_list/', views.employee_list, name='employee_list'),
+    path('add_employee/', views.add_employee, name='addemp'),
 
 ]
 if settings.DEBUG:

@@ -40,37 +40,38 @@ def livecam_feed(request):
 	return StreamingHttpResponse(gen(LiveWebCam()),
 					content_type='multipart/x-mixed-replace; boundary=frame')
 
-
-# employee adding logic 
 def employee_list(request):
     employees = Employee.objects.all()
     return render(request, 'employee_list.html', {'employees': employees})
 
 def add_employee(request):
+    success_message = None
+
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
-            employee = form.save()
-            # Renameing to  employee_id for facial regoniotion
-            if employee.profile_picture:
-                extension = employee.profile_picture.name.split('.')[-1]
-                new_name = f'{employee.employee_id}.{extension}'
-                employee.profile_picture.name = new_name
-                employee.save()
-            return redirect('employee_list')
+            existing_employee = Employee.objects.filter(employee_id=form.cleaned_data['employee_id']).first()
+            if existing_employee:
+                messages.error(request, 'Error adding employee. Employee data already exists.')
+            else:
+                employee = form.save()
+                if employee.profile_picture:
+                    extension = employee.profile_picture.name.split('.')[-1]
+                    new_name = f'{employee.employee_id}.{extension}'
+                    employee.profile_picture.name = new_name
+                    employee.save()
+                success_message = 'Employee added successfully!'
+                messages.success(request, success_message)
+                return redirect('employee_list')
         else:
-            print(form.errors)  
+            messages.error(request, 'Error adding employee. Please check the form.')
+            print(form.errors)
     else:
         form = EmployeeForm()
 
-    return render(request, 'addemployee.html', {'form': form})
+    return render(request, 'addemployee.html', {'form': form, 'success_message': success_message})
 
 
-
-# >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
-# =======
-
-# >>>>>>> 17061208419e3c5f98276d9d37d7c4fceac65be7
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -132,21 +133,6 @@ def regemployee(request):
      return render(request,'registeremployee.html')
 def addperson(request):
      return render(request,'addperson.html')
-def addemployee(request):
-    form = EmployeeForm(request.POST, request.FILES)
-    if form.is_valid():
-            name = form.cleaned_data['name']
-            employee_id = form.cleaned_data['employee_id']
-            if Employee.objects.filter(name=name, employee_id=employee_id).exists():
-                messages.error(request, 'Employee with the same name and ID already exists.')
-            else:
-                form.save()
-                messages.success(request, 'Employee added successfully.')
-                return redirect('addemp')
-    else:
-            messages.error(request, 'Invalid data. Please check the form.')
-    return render(request, 'addemployee.html',{'form':form})
-
 def employeehome(request):
      return render(request,'employeehome.html')
 def employeeprofile(request):

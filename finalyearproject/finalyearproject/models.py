@@ -19,7 +19,5 @@ class Employee(models.Model):
             new_name = f'{self.employee_id}.{extension}'
             self.profile_picture.name = new_name
         super().save(*args, **kwargs)
-
-
 def __str__(self):
      return self.title

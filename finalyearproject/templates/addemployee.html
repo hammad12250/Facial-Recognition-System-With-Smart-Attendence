@@ -215,17 +215,6 @@
             <button onclick="window.location.href='{% url 'loginoptions' %}'">
             <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
-        
-    
-        {% comment %} <div class="content">
-           
-
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <button type="submit">Add Employee</button>
-                        </form> 
-        </div>  {% endcomment %}
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="id_name">Name:</label>
@@ -242,8 +231,12 @@
             {{ form.profile_picture }}
             <button type="submit">Add Employee</button>
         </form>
-       
-    </body>
+        {% if success_message %}
+                <div class="alert alert-success">
+                    {{ success_message }}
+                </div>
+            {% endif %}
+     </body>
         
     </div>
  
