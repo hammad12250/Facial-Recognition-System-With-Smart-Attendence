@@ -40,6 +40,33 @@ def livecam_feed(request):
 	return StreamingHttpResponse(gen(LiveWebCam()),
 					content_type='multipart/x-mixed-replace; boundary=frame')
 
+
+# employee adding logic 
+def employee_list(request):
+    employees = Employee.objects.all()
+    return render(request, 'employee_list.html', {'employees': employees})
+
+def add_employee(request):
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, request.FILES)
+        if form.is_valid():
+            employee = form.save()
+            # Renameing to  employee_id for facial regoniotion
+            if employee.profile_picture:
+                extension = employee.profile_picture.name.split('.')[-1]
+                new_name = f'{employee.employee_id}.{extension}'
+                employee.profile_picture.name = new_name
+                employee.save()
+            return redirect('employee_list')
+        else:
+            print(form.errors)  
+    else:
+        form = EmployeeForm()
+
+    return render(request, 'addemployee.html', {'form': form})
+
+
+
 # >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
 # =======
 
@@ -74,6 +101,7 @@ def loginasemployee(request):
       return render(request,'loginemployee.html')
 def loginasguard(request):
     return render(request,'loginguard.html')
+
 def adminhomepage(request):
     return render(request,'adminhome.html')
 def addcamerapage(request):

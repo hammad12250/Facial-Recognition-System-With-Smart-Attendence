@@ -19,12 +19,14 @@ from django.urls import path
 from . import views 
 from django.conf import settings
 from django.conf.urls.static import static
+from .views import employee_list, add_employee
 urlpatterns = [
     path('admin/', admin.site.urls),
      path('', views.loginoptions, name='loginoptions'),
      path('loginadmin', views.loginasadmin, name='loginasadmin'),
      path('loginemployee', views.loginasemployee, name='loginasemployee'),
      path('loginguard', views.loginasguard, name='loginasguard'),
+    
     path('adminhome', views.adminhomepage, name='adminhomepage'),
     path('addcamera', views.addcamerapage, name='addcamerapage'),
     path('attendancereport', views.attendancereportbyadmin, name='attendancereportadmin'),
@@ -35,10 +37,13 @@ urlpatterns = [
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
+    
     path('connect-camera/', views.connect_camera, name='connect_camera'),
    path('', views.index, name='index'),
 
 	path('livecam_feed', views.livecam_feed, name='livecam_feed'),
+    path('employee_list/', employee_list, name='employee_list'),
+    path('add_employee/', add_employee, name='add_employee'),
 
 ]
 if settings.DEBUG:
