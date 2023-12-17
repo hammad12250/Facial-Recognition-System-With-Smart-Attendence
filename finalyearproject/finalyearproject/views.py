@@ -8,19 +8,18 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
+from django.shortcuts import HttpResponse
 from django.contrib import messages
 from django.http.response import StreamingHttpResponse
 from django.shortcuts import render
 from django.http import StreamingHttpResponse
 from finalyearproject.camera import LiveWebCam
 from django.shortcuts import render
-
+from .models import RtspCamera
+from .models import Employee
+from .forms import EmployeeForm
 def index(request):
-    # Your view logic here
     return render(request, 'adminhome.html')
-
-
-# camera connect storing data in database
 def connect_camera(request):
     if request.method == 'POST':
         form = CameraForm(request.POST)
@@ -31,10 +30,7 @@ def connect_camera(request):
     else:
         form = CameraForm()
 
-    return render(request, 'addcamera.html', {'form': form})
-
-
-# camera connection starts from here 
+    return render(request, 'addcamera.html', {'form': form}) 
 def gen(camera):
 	while True:
 		frame = camera.get_frame()
@@ -46,12 +42,7 @@ def livecam_feed(request):
 
 # >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
 # =======
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.shortcuts import HttpResponse
-from django.contrib.auth.models import User, Group
-from django.contrib import messages
-from .models import RtspCamera
+
 # >>>>>>> 17061208419e3c5f98276d9d37d7c4fceac65be7
 def loginoptions(request):
     return render(request, 'loginas.html')
@@ -114,7 +105,20 @@ def regemployee(request):
 def addperson(request):
      return render(request,'addperson.html')
 def addemployee(request):
-     return render(request,'addemployee.html')
+    form = EmployeeForm(request.POST, request.FILES)
+    if form.is_valid():
+            name = form.cleaned_data['name']
+            employee_id = form.cleaned_data['employee_id']
+            if Employee.objects.filter(name=name, employee_id=employee_id).exists():
+                messages.error(request, 'Employee with the same name and ID already exists.')
+            else:
+                form.save()
+                messages.success(request, 'Employee added successfully.')
+                return redirect('addemp')
+    else:
+            messages.error(request, 'Invalid data. Please check the form.')
+    return render(request, 'addemployee.html',{'form':form})
+
 def employeehome(request):
      return render(request,'employeehome.html')
 def employeeprofile(request):

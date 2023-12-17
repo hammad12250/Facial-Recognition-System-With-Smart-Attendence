@@ -110,15 +110,20 @@
     </div>
     <div class="container">
         <div class="navigation">
-            <button><i class="fas fa-home"></i> Home</button>
+            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
+            <i class="fas fa-home"></i> Home</button>
             <button><i class="fas fa-user"></i> Profile</button>
-            <button><i class="fas fa-video"></i> Add Camera</button>
+            <button onclick="window.location.href='{% url 'addcamerapage' %}'">
+            <i class="fas fa-video"></i> Add Camera</button>
             <button><i class="fas fa-bell"></i> Notifications</button>
-            <button><i class="fas fa-file-alt"></i> Attendance Report</button>
+            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
+            <i class="fas fa-file-alt"></i> Attendance Report</button>
             <button><i class="fas fa-user-clock"></i> Temporary Access</button>
-            <button><i class="fas fa-user-plus"></i> Register Account</button>
-            <button><i class="fas fa-address-book"></i> Add Person</button>
-            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <i class="fas fa-user-plus"></i> Register Account</button>
+            <button onclick="window.location.href='{% url 'addper' %}'">
+            <i class="fas fa-address-book"></i> Add Person</button>
+            <button onclick="window.location.href='{% url 'loginoptions' %}'">
+            <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
        
         <div class="content">

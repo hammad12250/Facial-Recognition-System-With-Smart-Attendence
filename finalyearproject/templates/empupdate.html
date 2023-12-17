@@ -244,9 +244,11 @@
     </div>
     <div class="container">
         <div class="navigation">
-            <button><i class="fas fa-user"></i> Profile</button>
+            <button onclick="window.location.href='{% url 'emphome' %}'">
+            <i class="fas fa-user"></i> Profile</button>
             <button><i class="fas fa-chart-bar"></i> Track Attendance</button>
-            <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+            <button onclick="window.location.href='{% url 'loginoptions' %}'">
+            <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         <div class="content">
             <form action="#" method="post">

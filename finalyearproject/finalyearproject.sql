@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2023 at 01:16 PM
+-- Generation Time: Dec 17, 2023 at 01:54 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -96,7 +96,15 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (25, 'Can add rtsp camera', 7, 'add_rtspcamera'),
 (26, 'Can change rtsp camera', 7, 'change_rtspcamera'),
 (27, 'Can delete rtsp camera', 7, 'delete_rtspcamera'),
-(28, 'Can view rtsp camera', 7, 'view_rtspcamera');
+(28, 'Can view rtsp camera', 7, 'view_rtspcamera'),
+(29, 'Can add camera', 8, 'add_camera'),
+(30, 'Can change camera', 8, 'change_camera'),
+(31, 'Can delete camera', 8, 'delete_camera'),
+(32, 'Can view camera', 8, 'view_camera'),
+(33, 'Can add employee', 9, 'add_employee'),
+(34, 'Can change employee', 9, 'change_employee'),
+(35, 'Can delete employee', 9, 'delete_employee'),
+(36, 'Can view employee', 9, 'view_employee');
 
 -- --------------------------------------------------------
 
@@ -123,7 +131,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-14 12:10:01.041729', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-17 12:33:32.496227', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
 (6, 'pbkdf2_sha256$600000$MFjaOFaqunBKqynLEb721T$fGdEImoXdsLlvl9wajKdm39YMLlazvZsb61egeC3QK4=', NULL, 0, 'Hammad123', '', '', '', 0, 1, '2023-12-13 12:41:06.778864'),
 (8, 'pbkdf2_sha256$600000$9F3EctWpN0p9DSekGNdVzJ$Jsz1qCfZvmG+9kPUh1JKctJ4nv/P1X5abFS/JxxXPA8=', '2023-12-13 13:11:51.664428', 0, 'Hammad12', '', '', '', 0, 1, '2023-12-13 12:44:47.099162'),
 (9, 'pbkdf2_sha256$600000$P0hMO3bnVC2FlNesY2yWWS$VMqxP0fE5QCyIm9Dw7sK6ymr2NAwkRxL2Wx+W1nadF4=', '2023-12-13 13:10:51.122026', 0, 'Ali', '', '', '', 0, 1, '2023-12-13 13:09:34.518165'),
@@ -209,6 +217,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(8, 'finalyearproject', 'camera'),
+(9, 'finalyearproject', 'employee'),
 (7, 'finalyearproject', 'rtspcamera'),
 (6, 'sessions', 'session');
 
@@ -248,7 +258,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (16, 'auth', '0011_update_proxy_permissions', '2023-12-12 10:13:11.763175'),
 (17, 'auth', '0012_alter_user_first_name_max_length', '2023-12-12 10:13:12.096615'),
 (18, 'sessions', '0001_initial', '2023-12-12 10:13:13.770033'),
-(19, 'finalyearproject', '0001_initial', '2023-12-14 11:59:35.388692');
+(19, 'finalyearproject', '0001_initial', '2023-12-14 11:59:35.388692'),
+(20, 'finalyearproject', '0002_camera_employee', '2023-12-17 09:05:02.052976'),
+(21, 'finalyearproject', '0003_alter_employee_profile_picture', '2023-12-17 11:20:03.218445');
 
 -- --------------------------------------------------------
 
@@ -268,7 +280,34 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
-('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rDkXR:G-NAooKyQJKi7OmbgiSwBrknv4q_FJEewiASAmM_Rsc', '2023-12-28 12:10:01.253255');
+('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rEqKq:UwEh4PQdHWY9i0H6AC6M71Xc3leDJlD1eqF6L9pt_34', '2023-12-31 12:33:32.646239');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finalyearproject_camera`
+--
+
+CREATE TABLE `finalyearproject_camera` (
+  `id` bigint(20) NOT NULL,
+  `camera_link` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finalyearproject_employee`
+--
+
+CREATE TABLE `finalyearproject_employee` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `employee_id` varchar(10) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `profile_picture` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -359,6 +398,18 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `finalyearproject_camera`
+--
+ALTER TABLE `finalyearproject_camera`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `finalyearproject_employee`
+--
+ALTER TABLE `finalyearproject_employee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `finalyearproject_rtspcamera`
 --
 ALTER TABLE `finalyearproject_rtspcamera`
@@ -384,7 +435,7 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
@@ -414,13 +465,25 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `finalyearproject_camera`
+--
+ALTER TABLE `finalyearproject_camera`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `finalyearproject_employee`
+--
+ALTER TABLE `finalyearproject_employee`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -74,6 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'finalyearproject.wsgi.application'
 
+# settings.py
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -81,27 +82,12 @@ WSGI_APPLICATION = 'finalyearproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-# <<<<<<< HEAD
 
-        # 'NAME': 'fyp',
-        # 'USER': 'fyp',
-        # 'PASSWORD': 'fyp',
-        # 'HOST': 'localhost',  # Set to the MySQL server host
-        # 'PORT': '3306',  # Set to the MySQL server port
-# =======
         'NAME': 'finalyearproject',
         'USER':'root',
         'PASSWORD':'',
         'HOST':'localhost',
         'PORT':'3306',
-# >>>>>>> beda830850716c36d3876ad6a50a748ae81dcc63
-# =======
-#         'NAME': 'finalyearproject',
-#         'USER':'root',
-#         'PASSWORD':'',
-#         'HOST':'localhost',
-#         'PORT':'3306',
-# >>>>>>> 17061208419e3c5f98276d9d37d7c4fceac65be7
     }
 }
 
@@ -142,6 +128,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR, 'static']
+
+MEDIA_ROOT= BASE_DIR, 'media/'
+MEDIA_URL= "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
