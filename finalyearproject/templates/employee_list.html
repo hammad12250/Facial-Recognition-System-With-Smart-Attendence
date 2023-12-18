@@ -174,17 +174,41 @@
         </div>
         
     
+       
         <div class="content">
-           
-
-            <h2>Employee List</h2>
-            <ul>
-                {% for employee in employees %}
-                    <li>{{ employee.name }} - {{ employee.employee_id }}</li>
-                {% endfor %}
-            </ul>
-        </div> 
-
+            <h2>Registered Employees</h2>
+            <table style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Name</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Employee ID</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Phone</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Address</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Profile Picture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.name }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.employee_id }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.phone }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.email }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.address }}</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">
+                                {% if employee.profile_picture %}
+                                    <img src="{{ '/img/img/'|add:employee.profile_picture.name }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd;">
+                                {% else %}
+                                    No picture available
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
        
     </body>
         
