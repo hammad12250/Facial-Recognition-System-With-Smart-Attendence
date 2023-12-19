@@ -105,7 +105,8 @@
     <div class="container">
         <div class="navigation">
             <button><i class="fas fa-home"></i> Home</button>
-            <button><i class="fas fa-user"></i> Profile</button>
+            <button onclick="window.location.href='{% url 'adminprofile' %}'">
+            <i class="fas fa-user"></i> Profile</button>
             <button onclick="window.location.href='{% url 'addcamerapage' %}'">
                 <i class="fas fa-video"></i> Add Camera
             </button>

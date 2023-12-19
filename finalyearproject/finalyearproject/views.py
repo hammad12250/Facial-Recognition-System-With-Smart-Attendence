@@ -15,8 +15,10 @@ from django.shortcuts import render
 from django.http import StreamingHttpResponse
 from finalyearproject.camera import LiveWebCam
 from django.shortcuts import render
+from django.http import Http404  
 from .models import RtspCamera
 from .models import Employee
+from .models import Admin
 from .forms import EmployeeForm
 def index(request):
     return render(request, 'adminhome.html')
@@ -131,6 +133,10 @@ def regemployee(request):
         return redirect('registeremp')
 
      return render(request,'registeremployee.html')
+def adminprofile(request):
+    adminprofile = Admin.objects.first()
+    return render(request, 'adminprof.html', {'adminprofile': adminprofile})
+
 def addperson(request):
      return render(request,'addperson.html')
 def employeehome(request):

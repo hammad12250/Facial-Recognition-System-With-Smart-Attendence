@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2023 at 01:54 PM
+-- Generation Time: Dec 19, 2023 at 01:25 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -104,7 +104,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (33, 'Can add employee', 9, 'add_employee'),
 (34, 'Can change employee', 9, 'change_employee'),
 (35, 'Can delete employee', 9, 'delete_employee'),
-(36, 'Can view employee', 9, 'view_employee');
+(36, 'Can view employee', 9, 'view_employee'),
+(37, 'Can add admin', 10, 'add_admin'),
+(38, 'Can change admin', 10, 'change_admin'),
+(39, 'Can delete admin', 10, 'delete_admin'),
+(40, 'Can view admin', 10, 'view_admin');
 
 -- --------------------------------------------------------
 
@@ -131,11 +135,12 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-17 12:33:32.496227', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-19 12:22:35.945919', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
 (6, 'pbkdf2_sha256$600000$MFjaOFaqunBKqynLEb721T$fGdEImoXdsLlvl9wajKdm39YMLlazvZsb61egeC3QK4=', NULL, 0, 'Hammad123', '', '', '', 0, 1, '2023-12-13 12:41:06.778864'),
 (8, 'pbkdf2_sha256$600000$9F3EctWpN0p9DSekGNdVzJ$Jsz1qCfZvmG+9kPUh1JKctJ4nv/P1X5abFS/JxxXPA8=', '2023-12-13 13:11:51.664428', 0, 'Hammad12', '', '', '', 0, 1, '2023-12-13 12:44:47.099162'),
 (9, 'pbkdf2_sha256$600000$P0hMO3bnVC2FlNesY2yWWS$VMqxP0fE5QCyIm9Dw7sK6ymr2NAwkRxL2Wx+W1nadF4=', '2023-12-13 13:10:51.122026', 0, 'Ali', '', '', '', 0, 1, '2023-12-13 13:09:34.518165'),
-(10, 'pbkdf2_sha256$600000$NCp3apLiHM2R9YXTMOC4rP$lIzV6Yd2YzHPaTcIDRL56bPcjMwqsTwVCp4noTeyX98=', '2023-12-13 13:24:15.926724', 0, 'hadiyet', '', '', '', 0, 1, '2023-12-13 13:23:00.954359');
+(10, 'pbkdf2_sha256$600000$NCp3apLiHM2R9YXTMOC4rP$lIzV6Yd2YzHPaTcIDRL56bPcjMwqsTwVCp4noTeyX98=', '2023-12-13 13:24:15.926724', 0, 'hadiyet', '', '', '', 0, 1, '2023-12-13 13:23:00.954359'),
+(11, 'pbkdf2_sha256$600000$FoDKdUcOOW4KLaXJ7C6SDE$gxyorp//SMHqaa/Q25ZKOlrNKhFTuwONKDW9NxEhye8=', NULL, 0, 'Alir', '', '', '', 0, 1, '2023-12-18 15:22:04.542150');
 
 -- --------------------------------------------------------
 
@@ -157,7 +162,8 @@ INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 6, 1),
 (2, 8, 1),
 (3, 9, 1),
-(4, 10, 1);
+(4, 10, 1),
+(5, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -217,6 +223,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(10, 'finalyearproject', 'admin'),
 (8, 'finalyearproject', 'camera'),
 (9, 'finalyearproject', 'employee'),
 (7, 'finalyearproject', 'rtspcamera'),
@@ -260,7 +267,9 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (18, 'sessions', '0001_initial', '2023-12-12 10:13:13.770033'),
 (19, 'finalyearproject', '0001_initial', '2023-12-14 11:59:35.388692'),
 (20, 'finalyearproject', '0002_camera_employee', '2023-12-17 09:05:02.052976'),
-(21, 'finalyearproject', '0003_alter_employee_profile_picture', '2023-12-17 11:20:03.218445');
+(21, 'finalyearproject', '0003_alter_employee_profile_picture', '2023-12-17 11:20:03.218445'),
+(22, 'finalyearproject', '0004_alter_employee_profile_picture', '2023-12-18 16:01:07.587511'),
+(23, 'finalyearproject', '0005_admin', '2023-12-18 16:01:09.344364');
 
 -- --------------------------------------------------------
 
@@ -280,7 +289,30 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
-('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rEqKq:UwEh4PQdHWY9i0H6AC6M71Xc3leDJlD1eqF6L9pt_34', '2023-12-31 12:33:32.646239');
+('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rFZ7M:vfSZpG3bDtrJpRmtjvWKAGoVt7J9V8YnH6Dmux1SN8c', '2024-01-02 12:22:36.020013');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finalyearproject_admin`
+--
+
+CREATE TABLE `finalyearproject_admin` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `admin_id` varchar(20) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `address` longtext NOT NULL,
+  `profile_picture` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `finalyearproject_admin`
+--
+
+INSERT INTO `finalyearproject_admin` (`id`, `name`, `admin_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
+(1, 'Admin', '1', '123333', 'ar256381@gmail.com', '12344', 'img/Admin-removebg-preview_1.png');
 
 -- --------------------------------------------------------
 
@@ -306,7 +338,7 @@ CREATE TABLE `finalyearproject_employee` (
   `phone` varchar(15) NOT NULL,
   `email` varchar(254) NOT NULL,
   `address` varchar(255) NOT NULL,
-  `profile_picture` varchar(255) DEFAULT NULL
+  `profile_picture` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -398,6 +430,13 @@ ALTER TABLE `django_session`
   ADD KEY `django_session_expire_date_a5c62663` (`expire_date`);
 
 --
+-- Indexes for table `finalyearproject_admin`
+--
+ALTER TABLE `finalyearproject_admin`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admin_id` (`admin_id`);
+
+--
 -- Indexes for table `finalyearproject_camera`
 --
 ALTER TABLE `finalyearproject_camera`
@@ -435,19 +474,19 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -465,13 +504,19 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `finalyearproject_admin`
+--
+ALTER TABLE `finalyearproject_admin`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_camera`
@@ -483,7 +528,7 @@ ALTER TABLE `finalyearproject_camera`
 -- AUTO_INCREMENT for table `finalyearproject_employee`
 --
 ALTER TABLE `finalyearproject_employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`

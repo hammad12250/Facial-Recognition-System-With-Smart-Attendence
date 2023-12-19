@@ -43,6 +43,7 @@ urlpatterns = [
 	path('livecam_feed', views.livecam_feed, name='livecam_feed'),
     path('employee_list/', views.employee_list, name='employee_list'),
     path('add_employee/', views.add_employee, name='addemp'),
+     path('adminprofile/', views.adminprofile, name='adminprofile'),
 
 ]
 if settings.DEBUG:

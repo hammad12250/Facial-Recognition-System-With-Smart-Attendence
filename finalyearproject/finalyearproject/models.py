@@ -19,5 +19,12 @@ class Employee(models.Model):
             new_name = f'{self.employee_id}.{extension}'
             self.profile_picture.name = new_name
         super().save(*args, **kwargs)
+class Admin(models.Model):
+    name = models.CharField(max_length=255)
+    admin_id = models.CharField(max_length=20, unique=True)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.TextField()
+    profile_picture = models.ImageField(upload_to='img/', blank=True, null=True)
 def __str__(self):
      return self.title
