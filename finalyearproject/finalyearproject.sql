@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2023 at 01:25 PM
+-- Generation Time: Dec 20, 2023 at 03:07 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -31,13 +31,6 @@ CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `auth_group`
---
-
-INSERT INTO `auth_group` (`id`, `name`) VALUES
-(1, 'employee');
 
 -- --------------------------------------------------------
 
@@ -135,12 +128,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-19 12:22:35.945919', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
-(6, 'pbkdf2_sha256$600000$MFjaOFaqunBKqynLEb721T$fGdEImoXdsLlvl9wajKdm39YMLlazvZsb61egeC3QK4=', NULL, 0, 'Hammad123', '', '', '', 0, 1, '2023-12-13 12:41:06.778864'),
-(8, 'pbkdf2_sha256$600000$9F3EctWpN0p9DSekGNdVzJ$Jsz1qCfZvmG+9kPUh1JKctJ4nv/P1X5abFS/JxxXPA8=', '2023-12-13 13:11:51.664428', 0, 'Hammad12', '', '', '', 0, 1, '2023-12-13 12:44:47.099162'),
-(9, 'pbkdf2_sha256$600000$P0hMO3bnVC2FlNesY2yWWS$VMqxP0fE5QCyIm9Dw7sK6ymr2NAwkRxL2Wx+W1nadF4=', '2023-12-13 13:10:51.122026', 0, 'Ali', '', '', '', 0, 1, '2023-12-13 13:09:34.518165'),
-(10, 'pbkdf2_sha256$600000$NCp3apLiHM2R9YXTMOC4rP$lIzV6Yd2YzHPaTcIDRL56bPcjMwqsTwVCp4noTeyX98=', '2023-12-13 13:24:15.926724', 0, 'hadiyet', '', '', '', 0, 1, '2023-12-13 13:23:00.954359'),
-(11, 'pbkdf2_sha256$600000$FoDKdUcOOW4KLaXJ7C6SDE$gxyorp//SMHqaa/Q25ZKOlrNKhFTuwONKDW9NxEhye8=', NULL, 0, 'Alir', '', '', '', 0, 1, '2023-12-18 15:22:04.542150');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-19 12:22:35.945919', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409');
 
 -- --------------------------------------------------------
 
@@ -153,17 +141,6 @@ CREATE TABLE `auth_user_groups` (
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `auth_user_groups`
---
-
-INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(1, 6, 1),
-(2, 8, 1),
-(3, 9, 1),
-(4, 10, 1),
-(5, 11, 1);
 
 -- --------------------------------------------------------
 
