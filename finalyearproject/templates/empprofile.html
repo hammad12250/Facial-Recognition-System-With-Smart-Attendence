@@ -160,18 +160,22 @@
         <div class="content">
             <div class="details-container">
                 <div class="details">
-                    <img src="Dumy.jfif" alt="Profile Picture"></br>
+                    
+                {% if employee_profile.profile_picture %}
+                                    <img src="{{ '/img/img/'|add:employee_profile.profile_picture.name }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd;">
+                                {% else %}
+                                    No picture available
+                                {% endif %}
+                            </br>
+                    <strong>Name:</strong> {{ employee_profile.name }}<br>
                 </br>
-                
-                    <strong>Name:</strong> John Doe<br>
+                    <strong>ID:</strong>  {{ employee_profile.employee_id }}<br>
                 </br>
-                    <strong>ID:</strong> 123456<br>
+                    <strong>Phone:</strong>  {{ employee_profile.phone }}<br>
                 </br>
-                    <strong>Phone:</strong> +1 234 567 890<br>
+                    <strong>Email:</strong> {{ employee_profile.email }}<br>
                 </br>
-                    <strong>Email:</strong> john.doe@example.com<br>
-                </br>
-                    <strong>Address:</strong> 123 Main St, Cityville<br>
+                    <strong>Address:</strong>{{ employee_profile.address }}<br>
                 </br>
                 </div>
                 

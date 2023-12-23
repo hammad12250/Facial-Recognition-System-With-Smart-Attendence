@@ -142,10 +142,23 @@ def employeehome(request):
     username = request.user.username
     employee_data = Employee.objects.get(employee_id=username)
     return render(request, 'employeehome.html', {'employee_data': employee_data})
+@csrf_protect
 def employeeprofile(request):
-     return render(request,'empprofile.html')
+    username = request.user.username
+    employee_profile = Employee.objects.get(employee_id=username)
+    return render(request, 'empprofile.html', {'employee_profile': employee_profile})
+
 def employeeupdate(request):
-     return render(request,'empupdate.html')
+    if request.method == 'POST':
+        form = EmployeeForm(request.POST, request.FILES, instance=request.user.employee)
+
+        if form.is_valid():
+            form.save()
+            return redirect('employeeprofile')
+    else:
+        form =EmployeeForm(instance=request.user.employee)
+
+    return render(request, 'empupdate.html', {'form': form})
 def adminprofile(request):
     adminprofile = Admin.objects.first()
     return render(request, 'adminprofile.html', {'adminprofile': adminprofile})
