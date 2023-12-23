@@ -5,14 +5,8 @@ for admin login
 username admin
 password Aliraza12
 for employee logins
-1)username Hammad12
-password hammad
-2)username hadiyet
-password h123
+1)username E1
+password employee
+2)username E2
+password employee2
 
-
-
-// create this table in DB with the field too store rtsp value in DB
-
-table name: finalyearproject_camera   
-column: camera_link (var char 255)

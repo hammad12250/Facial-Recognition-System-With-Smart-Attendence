@@ -1,4 +1,4 @@
-{% load static%}
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,7 +71,6 @@
             background: #555;
         }
         .content {
-            margin-top: 25px;
             flex: 1; /* Take remaining vertical space in the container */
             padding: 20px;
             background-color: #fff;
@@ -83,28 +82,61 @@
             max-width: 400px;
             margin: 0 auto;
         }
+
         label,
         input {
             margin-bottom: 15px;
             width: 100%;
         }
-      .camera-input {
-            margin-bottom: 15px;
-        }
 
-        .connect-button {
-            background-color: #4CAF50; /* Green color */
+        input[type="submit"] {
+            background-color: #4caf50;
             color: white;
-            padding: 15px;
+            padding: 15px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
-            transition: background 0.3s ease;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
-        .connect-button:hover {
-            background-color: #45a049; /* Darker green on hover */
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+    img {
+        max-width: 100%;
+        border: 4px solid #000; /* Black border */
+        border-radius: 50%; /* Make the image circular */
+        margin-top: 10px;
+       }
+
+        .update-button {
+            margin-top: 20px;
+        }
+        .update-button {
+            margin-top: 20px;
+            background-color: #4caf50; /* Default button background color */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-button:hover {
+            background-color: #45a049; /* Green background color on hover */
         }
     </style>
 </head>
@@ -117,36 +149,47 @@
     </div>
     <div class="container">
         <div class="navigation">
-            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
-                <i class="fas fa-home"> </i> Home
-             </button>
+            <button onclick="window.location.href='{% url 'adminhomepage' %}'">  
+                <i class="fas fa-home"></i> Home</button>
             <button><i class="fas fa-user"></i> Profile</button>
-            <button><i class="fas fa-video"></i> Add Camera</button>
+            <button onclick="window.location.href='{% url 'addcamerapage' %}'">  
+            <i class="fas fa-video"></i> Add Camera</button>
             <button><i class="fas fa-bell"></i> Notifications</button>
-            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
+            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">  
             <i class="fas fa-file-alt"></i> Attendance Report</button>
             <button><i class="fas fa-user-clock"></i> Temporary Access</button>
-            <button onclick="window.location.href='{% url 'registeracc' %}'">
-            <i class="fas fa-user-plus"></i> Register Account</button>
-            <button onclick="window.location.href='{% url 'addper' %}'">
+            <button onclick="window.location.href='{% url 'addper' %}'">  
             <i class="fas fa-address-book"></i> Add Person</button>
-            <button onclick="window.location.href='{% url 'loginoptions' %}'">
+            <button onclick="window.location.href='{% url 'loginoptions' %}'">  
             <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
-        <div class="content">
-            {% if success_message %}
-                <div class="alert alert-success">
-                    {{ success_message }}
-                </div>
-            {% endif %}
+     <div class="content">
+         <div class="details-container">
+            <div class="details">
+                {% if adminprofile.profile_picture %}
+                <img src="{{ adminprofile.profile_picture.url }}" alt="Profile Picture">
+                {% endif %}
+                </br>
+                <strong>Name:</strong> {{ adminprofile.name }} <br>
+                </br>
+                <strong>ID:</strong> {{ adminprofile.admin_id }} <br>
+                </br>
+                <strong>Phone:</strong> {{ adminprofile.phone }} <br>
+                </br>
+                <strong>Email:</strong> {{ adminprofile.email }} <br>
+                </br>
+                <strong>Address:</strong> {{ adminprofile.address }} <br>
+                </br>
+            </div>
+    
+            
+                <div class="button-label"></div>
+                <button class="update-button">Update Profile</button>
+            </a>
+         
+            </div>
+      </div>
         
-            <form action="{% url 'addcamerapage' %}" method="post">
-                {% csrf_token %}
-                <label for="cameraLink" class="camera-input">Camera Link:</label>
-                <input type="text" id="cameraLink" name="cameraLink" placeholder="rtsp://username:password@ip_address:port/cam/realmonitor?channel=1&subtype=0" required><br>
-                <input type="submit" class="connect-button" value="Connect">
-            </form>
-        </div>
     </div>
 </body>
 

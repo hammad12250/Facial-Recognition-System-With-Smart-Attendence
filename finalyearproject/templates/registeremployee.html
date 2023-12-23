@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -69,15 +68,13 @@
         <div class="forgot-password-label">Password:</div>
         <input name="password" class="forgot-password-input" type="password" placeholder="Password" required><br>
         <button class="forgot-password-button" type="submit">Generate</button>
-     </div>
-        {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
+    
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+</div>
 
 </form>
-    
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2023 at 03:07 PM
+-- Generation Time: Dec 23, 2023 at 02:17 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -31,6 +31,13 @@ CREATE TABLE `auth_group` (
   `id` int(11) NOT NULL,
   `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+INSERT INTO `auth_group` (`id`, `name`) VALUES
+(1, 'employee');
 
 -- --------------------------------------------------------
 
@@ -128,7 +135,9 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-19 12:22:35.945919', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-23 12:56:58.292834', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(11, 'pbkdf2_sha256$600000$dNMg0uNUIFPrdMoeMSEjpI$hzMV9XWJjGh8lRkUueSrqQ1rrKQ1q83RzucVTKDBGoU=', '2023-12-23 13:16:04.704468', 0, 'E1', '', '', '', 0, 1, '2023-12-23 11:38:34.851349'),
+(13, 'pbkdf2_sha256$600000$2oVC66RWOC3A5EomnMBG3h$W/dUuvwlkFA0CbCMtaQ+NvtGW40e/BY3SAAfcVxHr3k=', '2023-12-23 13:16:20.844779', 0, 'E2', '', '', '', 0, 1, '2023-12-23 12:57:13.212230');
 
 -- --------------------------------------------------------
 
@@ -141,6 +150,14 @@ CREATE TABLE `auth_user_groups` (
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
+(5, 11, 1),
+(7, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -245,8 +262,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (19, 'finalyearproject', '0001_initial', '2023-12-14 11:59:35.388692'),
 (20, 'finalyearproject', '0002_camera_employee', '2023-12-17 09:05:02.052976'),
 (21, 'finalyearproject', '0003_alter_employee_profile_picture', '2023-12-17 11:20:03.218445'),
-(22, 'finalyearproject', '0004_alter_employee_profile_picture', '2023-12-18 16:01:07.587511'),
-(23, 'finalyearproject', '0005_admin', '2023-12-18 16:01:09.344364');
+(22, 'finalyearproject', '0004_alter_employee_profile_picture', '2023-12-23 11:47:47.258477'),
+(23, 'finalyearproject', '0005_admin', '2023-12-23 11:47:48.262705');
 
 -- --------------------------------------------------------
 
@@ -266,7 +283,7 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
-('cl31gszhi8lhrwrjwf1uisq4cath6gwp', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rFZ7M:vfSZpG3bDtrJpRmtjvWKAGoVt7J9V8YnH6Dmux1SN8c', '2024-01-02 12:22:36.020013');
+('ggdqw0i3h5hfa06sc6b1f0jv7lerddc6', '.eJxVjDsOwjAQBe_iGllerze2KelzBsvrDw6gRMqnQtydREoB7ZuZ9xYhbmsL21LmMGRxFYDi8jtyTM8yHiQ_4nifZJrGdR5YHoo86SL7KZfX7XT_Dlpc2l4jdAUrZQLjwFFKoE20FDV7UFyhQqHa1YqsjCX01rB1e6CzIkTP4vMF7cc3Qw:1rH1rY:TodvoCJah-laweNQENZNRWK22ludc13LgYiczqHwryc', '2024-01-06 13:16:20.887945');
 
 -- --------------------------------------------------------
 
@@ -289,7 +306,7 @@ CREATE TABLE `finalyearproject_admin` (
 --
 
 INSERT INTO `finalyearproject_admin` (`id`, `name`, `admin_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
-(1, 'Admin', '1', '123333', 'ar256381@gmail.com', '12344', 'img/Admin-removebg-preview_1.png');
+(1, 'Admin', 'A1', '123', 'abc@gmail.com', 'babna', 'Admin-removebg-preview (1).png');
 
 -- --------------------------------------------------------
 
@@ -317,6 +334,14 @@ CREATE TABLE `finalyearproject_employee` (
   `address` varchar(255) NOT NULL,
   `profile_picture` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `finalyearproject_employee`
+--
+
+INSERT INTO `finalyearproject_employee` (`id`, `name`, `employee_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
+(18, 'employee', 'E1', '123333', '123@gamil.com', 'gg', 'E1..jpg'),
+(19, 'employee2', 'E2', '112211', 'ar256381@gmail.com', 'xnmx bmw', 'E2..png');
 
 -- --------------------------------------------------------
 
@@ -457,13 +482,13 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -493,7 +518,7 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT for table `finalyearproject_admin`
 --
 ALTER TABLE `finalyearproject_admin`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_camera`

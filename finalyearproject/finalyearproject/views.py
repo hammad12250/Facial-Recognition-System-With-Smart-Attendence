@@ -15,11 +15,12 @@ from django.shortcuts import render
 from django.http import StreamingHttpResponse
 from finalyearproject.camera import LiveWebCam
 from django.shortcuts import render
-from django.http import Http404  
 from .models import RtspCamera
 from .models import Employee
 from .models import Admin
 from .forms import EmployeeForm
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 def index(request):
     return render(request, 'adminhome.html')
 def connect_camera(request):
@@ -90,6 +91,17 @@ def loginasadmin(request):
             return render(request, 'loginadmin.html', {'error': 'Invalid login credentials'})
      return render(request,'loginadmin.html')
 def loginasemployee(request):
+      if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.groups.filter(name='employee').exists():
+            login(request, user)
+            return redirect('emphome') 
+        else:
+            return render(request, 'loginemployee.html', {'error': 'Invalid login credentials'})
       return render(request,'loginemployee.html')
 def loginasguard(request):
     return render(request,'loginguard.html')
@@ -108,15 +120,32 @@ def attendancereportbyadmin(request):
 def registeraccounts(request):
     return render(request,'registeraccount.html')
 def regemployee(request):
+     if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists. Please choose a different username.')
+            return render(request, 'registeremployee.html')
+        new_user = User.objects.create_user(username=username, password=password)
+        employee_group, created = Group.objects.get_or_create(name='employee')
+        new_user.groups.add(employee_group)
+
+        messages.success(request, 'Employee account created successfully!')
+        return redirect('registeremp')
+
      return render(request,'registeremployee.html')
-def adminprofile(request):
-    adminprofile = Admin.objects.first()
-    return render(request, 'adminprof.html', {'adminprofile': adminprofile})
 def addperson(request):
      return render(request,'addperson.html')
+@csrf_protect
 def employeehome(request):
-     return render(request,'employeehome.html')
+    # Assuming the Employee model has a field named 'employee_id'
+    username = request.user.username
+    employee_data = Employee.objects.get(employee_id=username)
+    return render(request, 'employeehome.html', {'employee_data': employee_data})
 def employeeprofile(request):
      return render(request,'empprofile.html')
 def employeeupdate(request):
      return render(request,'empupdate.html')
+def adminprofile(request):
+    adminprofile = Admin.objects.first()
+    return render(request, 'adminprofile.html', {'adminprofile': adminprofile})

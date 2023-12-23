@@ -126,6 +126,7 @@
 </head>
 
 <body>
+    <h1>Welcome, {{ employee_data.name }}!</h1>
     <div class="header">
         <h1>Facial Recognition System with Smart Attendance</h1>
     </div>
@@ -135,82 +136,14 @@
                 <i class="fas fa-user"></i>Profile
             </button>
             
-            <a href="Employeetrackattendence.html">
                 <button><i class="fas fa-chart-bar"></i> Track Attendance</button>
-            </a>
-            <a href="login as.html">
                 <button onclick="window.location.href='{% url 'loginoptions' %}'">
                 <i class="fas fa-sign-out-alt"></i> Logout</button>
-            </a>
+            
         </div>
-        <div class="attendance-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Sr No</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>24-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>25-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>26-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>27-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>28-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>29-10-2023</td>
-                        <td>Absent</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>30-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>31-10-2023</td>
-                        <td>Present</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <!-- <div class="progress-bar" id="prog" >
-            <progress value="75" min="0" max="100" style="visibility:hidden;height:0;width:0;">75%</progress>
-        </div> -->
-        <div class="progress-bar" id="prog">87%</div>
-    </div>
+    </div>   
 </body>
 
-    <script>  
-        const progressBar = document.getElementById('prog');
-        // change the below value dynamically to update attendence progress
-        const progressValue = 87; 
-
-        progressBar.style.background = `radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(green 0%, green ${progressValue}%, rgb(192, 255, 216) 0)`;
-        progressBar.style.setProperty('--progress', `"${progressValue}%"`);
-    </script>
 </html>
 
 
