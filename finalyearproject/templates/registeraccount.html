@@ -111,17 +111,25 @@
     <div class="container">
         <div class="navigation">
             <button onclick="window.location.href='{% url 'adminhomepage' %}'">
-            <i class="fas fa-home"></i> Home</button>
-            <button><i class="fas fa-user"></i> Profile</button>
+                <i class="fas fa-user"></i> Home</button>
+            <button onclick="window.location.href='{% url 'adminprofile' %}'">
+            <i class="fas fa-user"></i> Profile</button>
             <button onclick="window.location.href='{% url 'addcamerapage' %}'">
-            <i class="fas fa-video"></i> Add Camera</button>
+                <i class="fas fa-video"></i> Add Camera
+            </button>
             <button><i class="fas fa-bell"></i> Notifications</button>
             <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
-            <i class="fas fa-file-alt"></i> Attendance Report</button>
+                <i class="fas fa-video"></i> Attendance Report
+            </button>
             <button><i class="fas fa-user-clock"></i> Temporary Access</button>
-            <i class="fas fa-user-plus"></i> Register Account</button>
+            <button onclick="window.location.href='{% url 'registeracc' %}'">
+                <i class="fas fa-video"></i> Register Account
+            </button>
             <button onclick="window.location.href='{% url 'addper' %}'">
-            <i class="fas fa-address-book"></i> Add Person</button>
+                <i class="fas fa-video"></i> Add Person
+            </button>
+            <button onclick="window.location.href='{% url 'employee_list' %}'">
+                <i class="fas fa-user-plus"></i> Employees List</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'">
             <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>

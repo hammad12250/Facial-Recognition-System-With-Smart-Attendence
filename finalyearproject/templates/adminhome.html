@@ -104,7 +104,8 @@
     </div>
     <div class="container">
         <div class="navigation">
-            <button><i class="fas fa-home"></i> Home</button>
+            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
+                <i class="fas fa-user"></i> Home</button>
             <button onclick="window.location.href='{% url 'adminprofile' %}'">
             <i class="fas fa-user"></i> Profile</button>
             <button onclick="window.location.href='{% url 'addcamerapage' %}'">
@@ -121,6 +122,8 @@
             <button onclick="window.location.href='{% url 'addper' %}'">
                 <i class="fas fa-video"></i> Add Person
             </button>
+            <button onclick="window.location.href='{% url 'employee_list' %}'">
+                <i class="fas fa-user-plus"></i> Employees List</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'">
             <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
