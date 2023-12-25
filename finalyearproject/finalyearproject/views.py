@@ -18,7 +18,7 @@ from django.shortcuts import render
 from .models import RtspCamera
 from .models import Employee
 from .models import Admin
-from .forms import EmployeeForm
+from .forms import EmployeeForm, EmployeeUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 def index(request):
@@ -148,17 +148,32 @@ def employeeprofile(request):
     employee_profile = Employee.objects.get(employee_id=username)
     return render(request, 'empprofile.html', {'employee_profile': employee_profile})
 
+
 def employeeupdate(request):
+    username = request.user.username
+    employee_profile = Employee.objects.get(employee_id=username)
     if request.method == 'POST':
-        form = EmployeeForm(request.POST, request.FILES, instance=request.user.employee)
-
+        form = EmployeeUpdateForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('employeeprofile')
-    else:
-        form =EmployeeForm(instance=request.user.employee)
+            # Update the employee details in the database
+            employee = Employee.objects.get(employee_id=request.user.username)
+            employee.phone = form.cleaned_data['phone']
+            employee.email = form.cleaned_data['email']
+            employee.address = form.cleaned_data['address']
+            employee.save()
 
-    return render(request, 'empupdate.html', {'form': form})
+            
+            # return redirect(request, 'empprofile.html', {'employee_profile': employee_profile})
+            return redirect('empprof')
+    else:
+        employee = Employee.objects.get(employee_id=request.user.username)
+        form = EmployeeUpdateForm(initial={
+            'phone': employee.phone,
+            'email': employee.email,
+            'address': employee.address,
+        })
+
+    return render(request, 'empprofile.html', {'form': form})
 def adminprofile(request):
     adminprofile = Admin.objects.first()
     return render(request, 'adminprofile.html', {'adminprofile': adminprofile})

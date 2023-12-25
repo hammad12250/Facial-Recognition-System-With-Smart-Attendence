@@ -245,47 +245,40 @@
     <div class="container">
         <div class="navigation">
             <button onclick="window.location.href='{% url 'emphome' %}'">
+            <i class="fas fa-user"></i> Home</button>
+            <button onclick="window.location.href='{% url 'empprof' %}'">
             <i class="fas fa-user"></i> Profile</button>
             <button><i class="fas fa-chart-bar"></i> Track Attendance</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'">
             <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         <div class="content">
-            {% comment %} <form action="#" method="post">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br>
 
-                <label for="id">ID:</label>
-                <input type="text" id="id" name="id" required><br>
 
-                <label for="phone">Phone:</label>
-                <input type="tel" id="phone" name="phone" required><br>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required><br>
-
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address" required><br>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
-
-                <label for="retype-password">Re-type Password:</label>
-                <input type="password" id="retype-password" name="retype-password" required><br>
-
-                <input type="submit" value="Update">
-            </form> {% endcomment %}
-
-            <div class="details">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-    
-                    <button type="submit">Update Details</button>
-                </form>
+            <div class="details-container">
+                <div class="details">
+                    {% if employee_profile.profile_picture %}
+                        <img src="{{ '/img/img/'|add:employee_profile.profile_picture.name }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd;">
+                    {% else %}
+                        No picture available
+                    {% endif %}
+                    <br>
+                    <strong>Name:</strong> {{ employee_profile.name }}<br>
+                    <br>
+                    <strong>ID:</strong>  {{ employee_profile.employee_id }}<br>
+                    <br>
+                    <strong>Phone:</strong>  {{ employee_profile.phone }}<br>
+                    <br>
+                    <strong>Email:</strong> {{ employee_profile.email }}<br>
+                    <br>
+                    <strong>Address:</strong>{{ employee_profile.address }}<br>
+                    <br>
+                </div>
+            
             </div>
         </div>
     </div>
+    
 </body>
 
 </html>
