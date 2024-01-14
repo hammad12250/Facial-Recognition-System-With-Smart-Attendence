@@ -16,7 +16,7 @@ from django.http import StreamingHttpResponse
 from finalyearproject.camera import LiveWebCam
 from django.shortcuts import render
 from .models import RtspCamera
-from .models import Employee
+from .models import Employee, Attendance
 from .models import Admin
 from .forms import EmployeeForm, EmployeeUpdateForm
 from django.contrib.auth.decorators import login_required
@@ -141,7 +141,10 @@ def employeehome(request):
     # Assuming the Employee model has a field named 'employee_id'
     username = request.user.username
     employee_data = Employee.objects.get(employee_id=username)
-    return render(request, 'employeehome.html', {'employee_data': employee_data})
+    attendance_data = Attendance.objects.filter(person_id=username)
+
+    return render(request, 'employeehome.html', {'employee_data': employee_data, 'attendance_data': attendance_data})
+    # return render(request, 'employeehome.html', {'employee_data': employee_data})
 @csrf_protect
 def employeeprofile(request):
     username = request.user.username

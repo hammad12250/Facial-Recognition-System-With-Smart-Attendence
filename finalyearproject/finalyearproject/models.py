@@ -26,5 +26,12 @@ class Admin(models.Model):
     email = models.EmailField()
     address = models.TextField()
     profile_picture = models.ImageField(upload_to='img/', blank=True, null=True)
+class Attendance(models.Model):
+    person_id = models.IntegerField()
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.person_id} - {self.date} - {self.time}"
 def __str__(self):
      return self.title
