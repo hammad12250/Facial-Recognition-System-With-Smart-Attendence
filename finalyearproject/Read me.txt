@@ -5,8 +5,11 @@ for admin login
 username admin
 password Aliraza12
 for employee logins
-1)username E1
-password employee
-2)username E2
+1)username Ali_E1
+password employee1
+2)username Hidayet_E2
 password employee2
+2)username Hammad_E3
+password employee3
+
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2023 at 02:17 PM
+-- Generation Time: Jan 14, 2024 at 09:27 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -135,9 +135,10 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2023-12-23 12:56:58.292834', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
-(11, 'pbkdf2_sha256$600000$dNMg0uNUIFPrdMoeMSEjpI$hzMV9XWJjGh8lRkUueSrqQ1rrKQ1q83RzucVTKDBGoU=', '2023-12-23 13:16:04.704468', 0, 'E1', '', '', '', 0, 1, '2023-12-23 11:38:34.851349'),
-(13, 'pbkdf2_sha256$600000$2oVC66RWOC3A5EomnMBG3h$W/dUuvwlkFA0CbCMtaQ+NvtGW40e/BY3SAAfcVxHr3k=', '2023-12-23 13:16:20.844779', 0, 'E2', '', '', '', 0, 1, '2023-12-23 12:57:13.212230');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-01-13 10:13:03.100687', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(14, 'pbkdf2_sha256$600000$8cwPh6mjydq5ikNCDh1uLU$yXuTaRiksoljtYDEJs24a4AOxx3yRiQj6Cs95CSq0TM=', '2024-01-13 08:02:23.261122', 0, 'Ali_E1', '', '', '', 0, 1, '2024-01-13 07:53:34.363700'),
+(15, 'pbkdf2_sha256$600000$MHcE175coA7EbDyUvCk2O9$veaUbkbY8zv3s/PNDyvJgEQTa6NLhpNV2H38OJyrXtI=', NULL, 0, 'Hidayet_E2', '', '', '', 0, 1, '2024-01-13 07:56:03.133046'),
+(16, 'pbkdf2_sha256$600000$yG8GawDEtWXVqK2zflZqqc$HBSpFUuxCLhae8srpo4lvxD6QpziIIX08eN3u9gPyAU=', NULL, 0, 'Hammad_E3', '', '', '', 0, 1, '2024-01-13 07:59:00.462893');
 
 -- --------------------------------------------------------
 
@@ -156,8 +157,9 @@ CREATE TABLE `auth_user_groups` (
 --
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(5, 11, 1),
-(7, 13, 1);
+(8, 14, 1),
+(9, 15, 1),
+(10, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -283,6 +285,7 @@ CREATE TABLE `django_session` (
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
+('90xcsr7eirk86ecu701t9zr1ibg71j05', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rOb0h:KP_Ii3JTlcL8MvcZX6BrEO27b--mYomH1B4LCb67MTs', '2024-01-27 10:13:03.186577'),
 ('ggdqw0i3h5hfa06sc6b1f0jv7lerddc6', '.eJxVjDsOwjAQBe_iGllerze2KelzBsvrDw6gRMqnQtydREoB7ZuZ9xYhbmsL21LmMGRxFYDi8jtyTM8yHiQ_4nifZJrGdR5YHoo86SL7KZfX7XT_Dlpc2l4jdAUrZQLjwFFKoE20FDV7UFyhQqHa1YqsjCX01rB1e6CzIkTP4vMF7cc3Qw:1rH1rY:TodvoCJah-laweNQENZNRWK22ludc13LgYiczqHwryc', '2024-01-06 13:16:20.887945');
 
 -- --------------------------------------------------------
@@ -340,8 +343,9 @@ CREATE TABLE `finalyearproject_employee` (
 --
 
 INSERT INTO `finalyearproject_employee` (`id`, `name`, `employee_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
-(18, 'employee', 'E1', '123333', '123@gamil.com', 'gg', 'E1..jpg'),
-(19, 'employee2', 'E2', '112211', 'ar256381@gmail.com', 'xnmx bmw', 'E2..png');
+(20, 'Ali Raza', 'Ali_E1', '123-123-123', 'ar256381@gmail.com', 'abcwee', 'Ali_E1..jpg'),
+(21, 'Hidayet Ullah', 'Hidayet_E2', '123221', 'hidayetachak@gmail.com', 'abcwee', 'Hidayet_E2..jpg'),
+(22, 'Hammad Ahmed', 'Hammad_E3', '123221', 'hammad12250@gmail.com', 'xnmx bmw', 'Hammad_E3..jpg');
 
 -- --------------------------------------------------------
 
@@ -353,6 +357,16 @@ CREATE TABLE `finalyearproject_rtspcamera` (
   `id` bigint(20) NOT NULL,
   `camera_link` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `finalyearproject_rtspcamera`
+--
+
+INSERT INTO `finalyearproject_rtspcamera` (`id`, `camera_link`) VALUES
+(9, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(10, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(11, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(12, 'rtsp://192.168.0.110/h264_ulaw.sdp');
 
 --
 -- Indexes for dumped tables
@@ -482,13 +496,13 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -530,13 +544,13 @@ ALTER TABLE `finalyearproject_camera`
 -- AUTO_INCREMENT for table `finalyearproject_employee`
 --
 ALTER TABLE `finalyearproject_employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`
 --
 ALTER TABLE `finalyearproject_rtspcamera`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
