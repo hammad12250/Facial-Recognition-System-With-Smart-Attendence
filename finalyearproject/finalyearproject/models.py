@@ -27,7 +27,7 @@ class Admin(models.Model):
     address = models.TextField()
     profile_picture = models.ImageField(upload_to='img/', blank=True, null=True)
 class Attendance(models.Model):
-    person_id = models.CharField(max_length=10)
+    person_id = models.IntegerField()
     date = models.DateField()
     time = models.TimeField()
 

@@ -146,6 +146,7 @@
     <div class="header">
         <h1>Facial Recognition System with Smart Attendance</h1>
     </div>
+    
     <div class="container">
         <div class="navigation">
             <button onclick="window.location.href='{% url 'adminhomepage' %}'">
@@ -182,15 +183,16 @@
                     <div class="forgot-password-label">Password:</div>
                     <input name="password" class="forgot-password-input" type="password" placeholder="Password" required><br>
                     <button class="forgot-password-button" type="submit">Generate</button>
-                
-            {% if message %}
-                <p>{{ message }}</p>
-            {% endif %}
-            </div>
-            
+             </div>
+             
             </form>
-
+            {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
         </div>
+        
     </div>
 </body>
 

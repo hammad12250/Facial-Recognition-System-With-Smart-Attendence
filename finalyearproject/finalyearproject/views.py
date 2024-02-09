@@ -91,18 +91,33 @@ def loginasadmin(request):
             return render(request, 'loginadmin.html', {'error': 'Invalid login credentials'})
      return render(request,'loginadmin.html')
 def loginasemployee(request):
-      if request.method == 'POST':
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
+        # Check if the username is not empty
+        if not username:
+            messages.error(request, 'Please enter a valid username.')
+            return render(request, 'loginemployee.html', {'error': 'Please enter a valid username.'})
+
+        # Check if a user with the given username exists
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist.')
+            return render(request, 'loginemployee.html', {'error': 'User does not exist.'})
+
+        # Authenticate the user after verifying existence
         user = authenticate(request, username=username, password=password)
 
         if user is not None and user.groups.filter(name='employee').exists():
             login(request, user)
             return redirect('emphome') 
         else:
-            return render(request, 'loginemployee.html', {'error': 'Invalid login credentials'})
-      return render(request,'loginemployee.html')
+            messages.error(request, 'Invalid login credentials.')
+            return render(request, 'loginemployee.html', {'error': 'Invalid login credentials.'})
+
+    return render(request, 'loginemployee.html')
 def loginasguard(request):
     return render(request,'loginguard.html')
 
@@ -148,9 +163,18 @@ def employeehome(request):
 @csrf_protect
 def employeeprofile(request):
     username = request.user.username
-    employee_profile = Employee.objects.get(employee_id=username)
-    return render(request, 'empprofile.html', {'employee_profile': employee_profile})
 
+    try:
+        # Assuming the Employee model has a field named 'employee_id'
+        employee_profile = Employee.objects.get(employee_id=username)
+
+        # Your logic for rendering the template with employee_profile
+
+        return render(request, 'empprofile.html', {'employee_profile': employee_profile})
+
+    except ObjectDoesNotExist:
+        # Handle the case where the Employee does not exist
+        return render(request, 'employeehome.html', {'error_message': 'Employee profile does not exist.'})
 
 def employeeupdate(request):
     username = request.user.username
