@@ -73,8 +73,6 @@ def add_employee(request):
         form = EmployeeForm()
 
     return render(request, 'addemployee.html', {'form': form, 'success_message': success_message})
-
-
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -119,8 +117,33 @@ def loginasemployee(request):
 
     return render(request, 'loginemployee.html')
 def loginasguard(request):
-    return render(request,'loginguard.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        # Check if the username is not empty
+        if not username:
+            messages.error(request, 'Please enter a valid username.')
+            return render(request, 'loginguard.html', {'error': 'Please enter a valid username.'})
+
+        # Check if a user with the given username exists
+        try:
+            user = User.objects.get(username=username)
+        except User.DoesNotExist:
+            messages.error(request, 'User does not exist.')
+            return render(request, 'loginguard.html', {'error': 'User does not exist.'})
+
+        # Authenticate the user after verifying existence
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.groups.filter(name='Guard').exists():
+            login(request, user)
+            return redirect('guardhome') 
+        else:
+            messages.error(request, 'Invalid login credentials.')
+            return render(request, 'loginguard.html', {'error': 'Invalid login credentials.'})
+
+    return render(request, 'loginguard.html')
 def adminhomepage(request):
     return render(request,'adminhome.html')
 def addcamerapage(request):
@@ -204,3 +227,23 @@ def employeeupdate(request):
 def adminprofile(request):
     adminprofile = Admin.objects.first()
     return render(request, 'adminprofile.html', {'adminprofile': adminprofile})
+def employeeatt(request):
+    # Fetch attendance data from the database
+    attendance_data = Attendance.objects.all()  # Adjust this query based on your model and requirements
+    context = {'attendance_data': attendance_data}
+    return render(request, 'empattendance.html', context)
+def guardhome(request):
+    return render(request, 'guardhome.html')
+def regguard(request):
+     if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists. Please choose a different username.')
+            return render(request, 'registerguard.html')
+        new_user = User.objects.create_user(username=username, password=password)
+        Guard_group, created = Group.objects.get_or_create(name='Guard')
+        new_user.groups.add(Guard_group)
+        messages.success(request, 'Guard account created successfully!')
+        return redirect('registerguard')
+     return render(request,'registerGuard.html')

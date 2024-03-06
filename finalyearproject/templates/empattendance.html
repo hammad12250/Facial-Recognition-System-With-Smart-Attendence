@@ -189,44 +189,37 @@
                 <button onclick="window.location.href='{% url 'empprof' %}'">
                     <i class="fas fa-user"></i> Profile
                 </button>
-                <button onclick="window.location.href='{% url 'empattendance' %}'">
-                    <i class="fas fa-user"></i> Trace Attendance
-                </button>
+                <button><i class="fas fa-chart-bar"></i> Track Attendance</button>
                 <button onclick="window.location.href='{% url 'loginoptions' %}'">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
             </div>
     
             <div class="table-container">
-                <h2>Attendance Data</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Entry Time</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        {% for entry in attendance_data %}
-                            <tr>
-                                <td>{{ entry.date }}</td>
-                                <td>{{ entry.time }}</td
-    
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-            
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="{{ '/img/img/'|add:employee_data.profile_picture.name }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd; ">
-                            <p><strong>Name:</strong> {{ employee_data.name }}</p>
-                            <p><strong>ID:</strong> {{ employee_data.employee_id }}</p>
-                            <p><strong>Phone:</strong> {{ employee_data.phone }}</p>
-                            <p><strong>Email:</strong> {{ employee_data.email }}</p>
-                            <p><strong>Address:</strong> {{ employee_data.address }}</p>
-                        </div>
+            <h2>Attendance Data</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        {% for entry in attendance_data %}
+            <tr>
+                <td>{{ entry.date }}</td>
+                <td>
+                    {% if entry.time.hour >= 9 %}
+                        Absent
+                    {% elif 8 <= entry.time.hour < 9 %}
+                        Present
+
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
                     </div>
                 </div>
             

@@ -4,12 +4,8 @@ after importing refresh your code and xamp
 for admin login 
 username admin
 password Aliraza12
-for employee logins
-1)username Ali_E1
-password employee1
-2)username Hidayet_E2
-password employee2
-2)username Hammad_E3
-password employee3
+for guard logins
+id 14
+pass 1234
 
 

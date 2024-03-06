@@ -26,17 +26,19 @@ urlpatterns = [
      path('loginadmin', views.loginasadmin, name='loginasadmin'),
      path('loginemployee', views.loginasemployee, name='loginasemployee'),
      path('loginguard', views.loginasguard, name='loginasguard'),
+    path('guardhome', views.guardhome, name='guardhome'),
     
     path('adminhome', views.adminhomepage, name='adminhomepage'),
     path('addcamera', views.addcamerapage, name='addcamerapage'),
     path('attendancereport', views.attendancereportbyadmin, name='attendancereportadmin'),
     path('registeraccount', views.registeraccounts, name='registeracc'),
     path('registeremployee', views.regemployee, name='registeremp'),
+    path('registerguard', views.regguard, name='registerguard'),
     path('addperson', views.addperson, name='addper'),
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
-    
+    path('employeeattendance', views.employeeatt, name='empattendance'),
     path('connect-camera/', views.connect_camera, name='connect_camera'),
    path('', views.index, name='index'),
 

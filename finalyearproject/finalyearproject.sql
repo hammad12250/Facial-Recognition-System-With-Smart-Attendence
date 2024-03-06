@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2024 at 05:48 PM
+-- Generation Time: Mar 06, 2024 at 10:36 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -37,7 +37,8 @@ CREATE TABLE `auth_group` (
 --
 
 INSERT INTO `auth_group` (`id`, `name`) VALUES
-(1, 'employee');
+(1, 'employee'),
+(2, 'Guard');
 
 -- --------------------------------------------------------
 
@@ -139,9 +140,17 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-01-15 16:28:15.997108', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
-(15, 'pbkdf2_sha256$600000$TsXUfktkBxrVipjRHW6bed$6epD8WaFyDtDnCML7/py8n+OKZ1HVrs5MeGOUwOhBrc=', '2024-01-15 15:12:05.311299', 0, '10', '', '', '', 0, 1, '2024-01-14 12:27:59.181092'),
-(17, 'pbkdf2_sha256$600000$PsdFrKScVBGAjBjV8gB2a9$7BSq2afsgMCmsyc0RbZIdjQu1UfkfRys3Q4Dhlpb5u0=', '2024-01-15 15:15:24.385510', 0, 'Ali_E1', '', '', '', 0, 1, '2024-01-15 15:14:01.129996');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-03-06 09:28:36.536501', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(15, 'pbkdf2_sha256$600000$TsXUfktkBxrVipjRHW6bed$6epD8WaFyDtDnCML7/py8n+OKZ1HVrs5MeGOUwOhBrc=', '2024-03-06 07:57:35.999219', 0, '10', '', '', '', 0, 1, '2024-01-14 12:27:59.181092'),
+(17, 'pbkdf2_sha256$600000$PsdFrKScVBGAjBjV8gB2a9$7BSq2afsgMCmsyc0RbZIdjQu1UfkfRys3Q4Dhlpb5u0=', '2024-01-15 15:15:24.385510', 0, 'Ali_E1', '', '', '', 0, 1, '2024-01-15 15:14:01.129996'),
+(18, 'pbkdf2_sha256$600000$v38Kx7m8E1GuOqpcnYLpvD$UkynDnoy9gZqePoYtW3fHrRGWZtMtRVGZ4BQ5ydmsGI=', NULL, 0, '1', '', '', '', 0, 1, '2024-02-09 10:08:59.144087'),
+(19, 'pbkdf2_sha256$600000$fQ3TDV1fZKI5a4qWg7ui4u$jeWBOTSGMkpKMeMiPP2EOjTOJWSulSleIEWPoOFtRGk=', NULL, 0, '2', '', '', '', 0, 1, '2024-02-09 10:09:14.093014'),
+(20, 'pbkdf2_sha256$600000$sdxQx4voTjwpWs73nKY97P$0efdKPAoBvke9owahEBpXy2LfGguGBlx9M/pMZtXios=', NULL, 0, '4', '', '', '', 0, 1, '2024-02-09 10:10:13.585875'),
+(21, 'pbkdf2_sha256$600000$BNNsS4vFUlgtDPENyN4YeU$hr+AdW1+oEkUCRVB4iO4eojxjhBPr7rnsqg6dAE6gV4=', NULL, 0, '13', '', '', '', 0, 1, '2024-02-09 10:10:57.162841'),
+(22, 'pbkdf2_sha256$600000$iuyYGbbajcfC0NIZKbsBcA$bRk36jn5NQj5CqfjN++JtiBv4G0K+nA9lH8B0RVllxM=', NULL, 0, '44', '', '', '', 0, 1, '2024-02-09 10:12:05.237908'),
+(23, 'pbkdf2_sha256$600000$OqZNkS0t18I5nygd4XdP9X$9zBStFJN/jHPoJWDYHDjXNTe9pt0heZcpYkfZ+Plamw=', NULL, 0, '33', '', '', '', 0, 1, '2024-02-09 10:14:27.917888'),
+(24, 'pbkdf2_sha256$600000$7i5VmARjXTxyEjqlSTtJzT$QPh1IKUgh9agm94trw8SpdQIDe8Oum4io9prQcoaPDA=', '2024-02-09 10:39:22.884165', 0, 'E1', '', '', '', 0, 1, '2024-02-09 10:18:27.368558'),
+(25, 'pbkdf2_sha256$600000$ATEUm4H3rSpDrTdHyzU1Ap$PIOFPx2DF4HYC8FwP0dM+omijrkOnysb6N/esZkJQW0=', '2024-03-06 09:35:30.635100', 0, '14', '', '', '', 0, 1, '2024-03-06 09:24:14.835802');
 
 -- --------------------------------------------------------
 
@@ -161,7 +170,15 @@ CREATE TABLE `auth_user_groups` (
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
 (9, 15, 1),
-(11, 17, 1);
+(11, 17, 1),
+(12, 18, 1),
+(13, 19, 1),
+(14, 20, 1),
+(15, 21, 1),
+(16, 22, 1),
+(17, 23, 1),
+(18, 24, 1),
+(19, 25, 2);
 
 -- --------------------------------------------------------
 
@@ -197,7 +214,8 @@ CREATE TABLE `django_admin_log` (
 --
 
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
-(1, '2023-12-13 12:29:27.861829', '1', 'employee', 1, '[{\"added\": {}}]', 3, 2);
+(1, '2023-12-13 12:29:27.861829', '1', 'employee', 1, '[{\"added\": {}}]', 3, 2),
+(2, '2024-03-06 08:44:59.440011', '2', 'Guard', 1, '[{\"added\": {}}]', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -270,7 +288,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (22, 'finalyearproject', '0004_alter_employee_profile_picture', '2023-12-23 11:47:47.258477'),
 (23, 'finalyearproject', '0005_admin', '2023-12-23 11:47:48.262705'),
 (24, 'finalyearproject', '0006_attendance', '2024-01-14 11:20:53.440536'),
-(25, 'finalyearproject', '0007_alter_attendance_person_id', '2024-01-15 15:10:57.697942');
+(25, 'finalyearproject', '0007_alter_attendance_person_id', '2024-01-15 15:10:57.697942'),
+(26, 'finalyearproject', '0008_alter_attendance_person_id', '2024-02-09 09:29:36.756549');
 
 -- --------------------------------------------------------
 
@@ -292,8 +311,10 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
 ('a2qj45haf9yx6csf7qrz85fmn1sgs3l2', '.eJxVjMsOwiAQRf-FtSHQYRBcuvcbCI8ZqRqalHZl_HfbpAvd3nPOfYsQ16WGtdMcxiIuQqM4_Y4p5ie1nZRHbPdJ5qkt85jkrsiDdnmbCr2uh_t3UGOvW41gDTCy88Um6yyDMpodK5OMgozESGfS2rMqjBGiH4B03opBFW1AfL74_jfc:1rOzqa:a8E_ffe36daN7V9MUo75yHIFomU_tTQw7LXrdTUfl-E', '2024-01-28 12:44:16.828711'),
 ('ggdqw0i3h5hfa06sc6b1f0jv7lerddc6', '.eJxVjDsOwjAQBe_iGllerze2KelzBsvrDw6gRMqnQtydREoB7ZuZ9xYhbmsL21LmMGRxFYDi8jtyTM8yHiQ_4nifZJrGdR5YHoo86SL7KZfX7XT_Dlpc2l4jdAUrZQLjwFFKoE20FDV7UFyhQqHa1YqsjCX01rB1e6CzIkTP4vMF7cc3Qw:1rH1rY:TodvoCJah-laweNQENZNRWK22ludc13LgYiczqHwryc', '2024-01-06 13:16:20.887945'),
-('h8lolg3b1rsp1avt2zty94ah98rsjesf', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rPPou:A1e2WdLKg72j_g7F518-VEXOf6CsLspunxRBY8qrbXw', '2024-01-29 16:28:16.045453'),
-('je9m22o9149iyv3k6mgp8ctc9z68swr2', '.eJxVjDsOAiEUAO9CbQj_j6X9noE8HiCrBpJltzLe3ZBsoe3MZN4kwLHXcIy8hTWRK-GKXH5hBHzmNk16QLt3ir3t2xrpTOhpB116yq_b2f4NKow6vyZy40Dr4lGzLEH4Atwa54vj6AqiSRllLMqwqITRRYKWEIVNliUmyecLC6s4NQ:1rH2t6:qYAn2xzo9Ndvmf9gANxiM_uou6Buo4XGuJoXLXV7xVQ', '2024-01-06 14:22:00.672951');
+('h8lolg3b1rsp1avt2zty94ah98rsjesf', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rPfd0:lUZIbRdK_fBGFkDWKlmJVsO1Hv3i5anEnTUI-5GtVh4', '2024-01-30 09:21:02.752419'),
+('je9m22o9149iyv3k6mgp8ctc9z68swr2', '.eJxVjDsOAiEUAO9CbQj_j6X9noE8HiCrBpJltzLe3ZBsoe3MZN4kwLHXcIy8hTWRK-GKXH5hBHzmNk16QLt3ir3t2xrpTOhpB116yq_b2f4NKow6vyZy40Dr4lGzLEH4Atwa54vj6AqiSRllLMqwqITRRYKWEIVNliUmyecLC6s4NQ:1rH2t6:qYAn2xzo9Ndvmf9gANxiM_uou6Buo4XGuJoXLXV7xVQ', '2024-01-06 14:22:00.672951'),
+('wf6il9l2juufh65npgfx2ybolylay6xx', '.eJxVjMsOwiAURP-FtSE8ykOX7v0Gci8XpGogKe3K-O_SpAvdTWbOmTcLsK0lbD0tYSZ2Ycqw02-JEJ-p7gs9oN4bj62uy4x8R_ixdn5rlF7Xg_07KNDLsL0jnLyMWjippSOZCYkMeaf0hCKlDN4qZ6cRtBQGbdaCzhFcHJYH9vkCCmg4Yg:1rhngQ:qe77J2YcqdMDSx9jBwt4lwFqoiN6NnuuhlGoRL9Oq1k', '2024-03-20 09:35:30.819986'),
+('y70nuar7yhlmqi97wqr3mtyj0fiw5td7', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rYOSA:bAwbCVuQCyOBSRjoouL6ZEDu7mVW40ZIqa4hh73Uh3g', '2024-02-23 10:49:54.859420');
 
 -- --------------------------------------------------------
 
@@ -326,7 +347,7 @@ INSERT INTO `finalyearproject_admin` (`id`, `name`, `admin_id`, `phone`, `email`
 
 CREATE TABLE `finalyearproject_attendance` (
   `id` bigint(20) NOT NULL,
-  `person_id` varchar(10) NOT NULL,
+  `person_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -336,7 +357,7 @@ CREATE TABLE `finalyearproject_attendance` (
 --
 
 INSERT INTO `finalyearproject_attendance` (`id`, `person_id`, `date`, `time`) VALUES
-(2, '10', '2024-01-14', '17:15:26.983638');
+(2, 10, '2024-01-14', '17:15:26.983638');
 
 -- --------------------------------------------------------
 
@@ -389,32 +410,24 @@ CREATE TABLE `finalyearproject_rtspcamera` (
 --
 
 INSERT INTO `finalyearproject_rtspcamera` (`id`, `camera_link`) VALUES
-(22, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(23, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(24, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(25, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(26, 'rtsp://192.168.0.110/h264_ulaw.sdp'),
-(27, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(28, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(29, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(30, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(31, 'rtsp://192.168.0.110/h264_ulaw.sdp'),
-(32, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(33, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(34, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(35, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(36, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(37, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(38, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(39, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(40, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(41, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(42, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(43, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(44, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(45, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(46, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(47, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp');
+(47, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(48, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(49, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(50, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(51, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(52, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(53, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(54, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(55, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(56, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(57, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(58, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(59, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(60, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(61, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(62, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(63, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(64, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp');
 
 --
 -- Indexes for dumped tables
@@ -532,7 +545,7 @@ ALTER TABLE `finalyearproject_rtspcamera`
 -- AUTO_INCREMENT for table `auth_group`
 --
 ALTER TABLE `auth_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `auth_group_permissions`
@@ -550,13 +563,13 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -568,7 +581,7 @@ ALTER TABLE `auth_user_user_permissions`
 -- AUTO_INCREMENT for table `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `django_content_type`
@@ -580,7 +593,7 @@ ALTER TABLE `django_content_type`
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_admin`
@@ -610,7 +623,7 @@ ALTER TABLE `finalyearproject_employee`
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`
 --
 ALTER TABLE `finalyearproject_rtspcamera`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- Constraints for dumped tables
