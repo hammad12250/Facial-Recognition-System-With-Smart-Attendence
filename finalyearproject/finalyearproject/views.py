@@ -18,7 +18,9 @@ from django.shortcuts import render
 from .models import RtspCamera
 from .models import Employee, Attendance
 from .models import Admin
+from .models import Guard
 from .forms import EmployeeForm, EmployeeUpdateForm
+from .forms import GuardForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 def index(request):
@@ -46,10 +48,8 @@ def livecam_feed(request):
 def employee_list(request):
     employees = Employee.objects.all()
     return render(request, 'employee_list.html', {'employees': employees})
-
 def add_employee(request):
     success_message = None
-
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -57,12 +57,7 @@ def add_employee(request):
             if existing_employee:
                 messages.error(request, 'Error adding employee. Employee data already exists.')
             else:
-                employee = form.save()
-                if employee.profile_picture:
-                    extension = employee.profile_picture.name.split('.')[-1]
-                    new_name = f'{employee.employee_id}.{extension}'
-                    employee.profile_picture.name = new_name
-                    employee.save()
+                form.save()
                 success_message = 'Employee added successfully!'
                 messages.success(request, success_message)
                 return redirect('employee_list')
@@ -73,6 +68,7 @@ def add_employee(request):
         form = EmployeeForm()
 
     return render(request, 'addemployee.html', {'form': form, 'success_message': success_message})
+
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -229,10 +225,14 @@ def adminprofile(request):
     return render(request, 'adminprofile.html', {'adminprofile': adminprofile})
 def employeeatt(request):
     # Fetch attendance data from the database
-    attendance_data = Attendance.objects.all()  # Adjust this query based on your model and requirements
-    context = {'attendance_data': attendance_data}
-    return render(request, 'empattendance.html', context)
+    username = request.user.username
+    employee_data = Employee.objects.get(employee_id=username)
+    attendance_data = Attendance.objects.filter(person_id=username)
+    return render(request, 'empattendance.html')
 def guardhome(request):
+    # Assuming the Employee model has a field named 'employee_id'
+    username = request.user.username
+    guard_data = Guard.objects.get(guard_id=username)
     return render(request, 'guardhome.html')
 def regguard(request):
      if request.method == 'POST':
@@ -246,4 +246,25 @@ def regguard(request):
         new_user.groups.add(Guard_group)
         messages.success(request, 'Guard account created successfully!')
         return redirect('registerguard')
-     return render(request,'registerGuard.html')
+     return render(request,'registerGuard.html')  
+ 
+def add_Guard(request):
+    success_message = None
+    if request.method == 'POST':
+        form = GuardForm(request.POST, request.FILES)
+        if form.is_valid():
+            existing_guard = Guard.objects.filter(guard_id=form.cleaned_data['guard_id']).first()
+            if existing_guard:
+                messages.error(request, 'Error adding guard. Guard data already exists.')
+            else:
+                form.save()
+                success_message = 'Guard added successfully!'
+                messages.success(request, success_message)
+                return redirect('addguard')
+        else:
+            messages.error(request, 'Error adding guard. Please check the form.')
+            print(form.errors)
+    else:
+        form = GuardForm()
+
+    return render(request, 'addguard.html', {'form': form, 'success_message': success_message})

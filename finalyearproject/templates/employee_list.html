@@ -205,7 +205,7 @@
                             <td style="border: 1px solid #ddd; padding: 8px;">{{ employee.address }}</td>
                             <td style="border: 1px solid #ddd; padding: 8px;">
                                 {% if employee.profile_picture %}
-                                    <img src="{{ '/img/img/'|add:employee.profile_picture.name }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd;">
+                                    <img src="{{employee.profile_picture.url }}" alt="{{ employee.name }} Profile Picture" style="max-width: 100px; max-height: 100px; border: 1px solid #ddd;">
                                 {% else %}
                                     No picture available
                                 {% endif %}

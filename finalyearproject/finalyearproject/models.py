@@ -15,7 +15,7 @@ class Employee(models.Model):
     profile_picture = models.ImageField(upload_to='img/', null=True, blank=True)
     def save(self, *args, **kwargs):
         if self.profile_picture:
-            extension = os.path.splitext(self.profile_picture.name)[1]
+            extension = self.profile_picture.name.split('.')[-1]
             new_name = f'{self.employee_id}.{extension}'
             self.profile_picture.name = new_name
         super().save(*args, **kwargs)
@@ -34,4 +34,17 @@ class Attendance(models.Model):
     def __str__(self):
         return f"{self.person_id} - {self.date} - {self.time}"
 def __str__(self):
-     return self.title
+     return self.title 
+class Guard(models.Model):
+    name = models.CharField(max_length=255)
+    guard_id = models.CharField(max_length=10)
+    phone = models.CharField(max_length=15)
+    email = models.EmailField()
+    address = models.CharField(max_length=255)
+    profile_picture = models.ImageField(upload_to='img/', null=True, blank=True)
+    def save(self, *args, **kwargs):
+        if self.profile_picture:
+            extension = self.profile_picture.name.split('.')[-1]
+            new_name = f'{self.guard_id}.{extension}'
+            self.profile_picture.name = new_name
+        super().save(*args, **kwargs)

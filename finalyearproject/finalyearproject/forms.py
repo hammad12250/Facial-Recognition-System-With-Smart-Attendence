@@ -1,6 +1,7 @@
 from django import forms
 from .models import Camera
 from .models import Employee
+from .models import Guard
 class CameraForm(forms.ModelForm):
     class Meta:
         model = Camera
@@ -32,3 +33,26 @@ class EmployeeUpdateForm(forms.Form):
     phone = forms.CharField(max_length=15, required=True)
     email = forms.EmailField(required=True)
     address = forms.CharField(required=True)
+class GuardForm(forms.ModelForm):
+    class Meta:
+        model = Guard
+        fields = ['name', 'guard_id', 'phone', 'email', 'address', 'profile_picture']
+    def clean_guard_id(self):
+        guard_id = self.cleaned_data['guard_id']
+
+        # Ensure that guard_id is an integer
+        try:
+            int(guard_id)
+        except ValueError:
+            raise forms.ValidationError("Guard ID must be an integer.")
+
+        return guard_id
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+
+        # Ensure that email ends with '@gmail.com'
+        if not email.endswith('@gmail.com'):
+            raise forms.ValidationError("Email must be in the form of '@gmail.com'.")
+
+        return email

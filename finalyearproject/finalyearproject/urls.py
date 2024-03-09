@@ -35,6 +35,7 @@ urlpatterns = [
     path('registeremployee', views.regemployee, name='registeremp'),
     path('registerguard', views.regguard, name='registerguard'),
     path('addperson', views.addperson, name='addper'),
+    path('addguard', views.add_Guard, name='addguard'),
     path('employeehome', views.employeehome, name='emphome'),
     path('employeeprofile', views.employeeprofile, name='empprof'),
     path('employeeupdate', views.employeeupdate, name='empupdate'),
