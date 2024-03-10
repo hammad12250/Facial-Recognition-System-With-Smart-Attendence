@@ -5,7 +5,7 @@ for admin login
 username admin
 password Aliraza12
 for guard logins
-id 14
-pass 1234
+id 16
+pass asdf
 
 

@@ -56,3 +56,7 @@ class GuardForm(forms.ModelForm):
             raise forms.ValidationError("Email must be in the form of '@gmail.com'.")
 
         return email
+class GuardUpdateForm(forms.Form):
+    phone = forms.CharField(max_length=15, required=True)
+    email = forms.EmailField(required=True)
+    address = forms.CharField(required=True)

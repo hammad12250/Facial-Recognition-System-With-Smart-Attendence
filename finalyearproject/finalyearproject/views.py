@@ -20,7 +20,7 @@ from .models import Employee, Attendance
 from .models import Admin
 from .models import Guard
 from .forms import EmployeeForm, EmployeeUpdateForm
-from .forms import GuardForm
+from .forms import GuardForm, GuardUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 def index(request):
@@ -268,3 +268,42 @@ def add_Guard(request):
         form = GuardForm()
 
     return render(request, 'addguard.html', {'form': form, 'success_message': success_message})
+def guardprofile(request):
+    username = request.user.username
+
+    try:
+        # Assuming the Employee model has a field named 'employee_id'
+        guard_profile = Guard.objects.get(guard_id=username)
+
+        # Your logic for rendering the template with employee_profile
+
+        return render(request, 'guardprofile.html', {'guard_profile': guard_profile})
+
+    except ObjectDoesNotExist:
+        # Handle the case where the Employee does not exist
+        return render(request, 'guardhome.html', {'error_message': 'Guard profile does not exist.'})
+def guardupdate(request):
+    username = request.user.username
+    guard_profile = Guard.objects.get(guard_id=username)
+    if request.method == 'POST':
+        form = GuardUpdateForm(request.POST)
+        if form.is_valid():
+            guard = Guard.objects.get(guard_id=request.user.username)
+            guard.phone = form.cleaned_data['phone']
+            guard.email = form.cleaned_data['email']
+            guard.address = form.cleaned_data['address']
+            guard.save()
+
+            
+            # return redirect(request, 'empprofile.html', {'employee_profile': employee_profile})
+            return redirect('guardprofile')
+    else:
+        guard = Guard.objects.get(guard_id=request.user.username)
+        form = GuardUpdateForm(initial={
+            'phone': employee.phone,
+            'email': employee.email,
+            'address': employee.address,
+        })
+
+    return render(request, 'guardprofile.html', {'form': form})
+

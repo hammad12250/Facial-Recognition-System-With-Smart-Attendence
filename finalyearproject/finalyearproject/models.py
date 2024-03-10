@@ -14,10 +14,13 @@ class Employee(models.Model):
     address = models.CharField(max_length=255)
     profile_picture = models.ImageField(upload_to='img/', null=True, blank=True)
     def save(self, *args, **kwargs):
-        if self.profile_picture:
+        is_new_instance = not self.pk  # Check if it's a new instance (not saved to the database yet)
+        
+        if is_new_instance and self.profile_picture:
             extension = self.profile_picture.name.split('.')[-1]
             new_name = f'{self.employee_id}.{extension}'
             self.profile_picture.name = new_name
+
         super().save(*args, **kwargs)
 class Admin(models.Model):
     name = models.CharField(max_length=255)
@@ -43,8 +46,11 @@ class Guard(models.Model):
     address = models.CharField(max_length=255)
     profile_picture = models.ImageField(upload_to='img/', null=True, blank=True)
     def save(self, *args, **kwargs):
-        if self.profile_picture:
+        is_new_instance = not self.pk  # Check if it's a new instance (not saved to the database yet)
+        
+        if is_new_instance and self.profile_picture:
             extension = self.profile_picture.name.split('.')[-1]
             new_name = f'{self.guard_id}.{extension}'
             self.profile_picture.name = new_name
+
         super().save(*args, **kwargs)

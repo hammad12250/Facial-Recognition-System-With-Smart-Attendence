@@ -104,7 +104,7 @@
     <div class="container">
         <div class="navigation">
             <button><i class="fas fa-home"></i> Home</button>
-            <button><i class="fas fa-user"></i>Profile</button>
+            <button onclick="window.location.href='{% url 'guardprofile' %}'"> <i class="fas fa-sign-out-alt"></i>Profile</button>
             <button><i class="fas fa-user-clock"></i> Temporary Access</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'"> <i class="fas fa-sign-out-alt"></i> Logout</button>
         <div class="live-feed">
