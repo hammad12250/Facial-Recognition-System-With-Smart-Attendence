@@ -23,6 +23,9 @@ from .forms import EmployeeForm, EmployeeUpdateForm
 from .forms import GuardForm, GuardUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
+from .forms import TemporaryPersonForm
+from .models import TemporaryPerson
+from datetime import datetime
 def index(request):
     return render(request, 'adminhome.html')
 def connect_camera(request):
@@ -307,3 +310,23 @@ def guardupdate(request):
 
     return render(request, 'guardprofile.html', {'form': form})
 
+
+
+
+def add_temporary_person(request):
+    success_message = None
+    if request.method == 'POST':
+        form = TemporaryPersonForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            success_message = "Person added successfully!"
+            return render(request, 'guardhome.html')
+    else:
+        form = TemporaryPersonForm()
+    return render(request, 'tempperson.html', {'form': form, 'success_message': success_message})
+
+def remove_expired_photos():
+    expired_people = TemporaryPerson.objects.filter(expiration_datetime__lt=datetime.now())
+    for person in expired_people:
+        person.photo.delete()
+        person.delete()

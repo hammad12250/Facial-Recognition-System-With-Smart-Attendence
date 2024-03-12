@@ -54,3 +54,11 @@ class Guard(models.Model):
             self.profile_picture.name = new_name
 
         super().save(*args, **kwargs)
+
+
+
+class TemporaryPerson(models.Model):
+    name = models.CharField(max_length=100)
+    reason_for_visiting = models.TextField()
+    expiration_datetime = models.DateTimeField()
+    photo = models.ImageField(upload_to='img/')
