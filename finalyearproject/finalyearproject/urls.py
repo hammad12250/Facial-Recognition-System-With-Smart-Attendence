@@ -49,7 +49,9 @@ urlpatterns = [
     path('employee_list/', views.employee_list, name='employee_list'),
     path('add_employee/', views.add_employee, name='addemp'),
       path('adminprofile/', views.adminprofile, name='adminprofile'),
-       path('tempperson/', views.add_temporary_person, name='tempperson'),
+      path('adminupdate/', views.adminupdate, name='adminupdate'),
+      path('tempperson/', views.add_temporary_person, name='tempperson'),
+      path('temppersonadmin/', views.temporarypersonadmin, name='tempadmin'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

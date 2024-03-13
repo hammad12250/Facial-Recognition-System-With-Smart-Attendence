@@ -19,13 +19,16 @@ from .models import RtspCamera
 from .models import Employee, Attendance
 from .models import Admin
 from .models import Guard
+from .models import TemporaryPerson
+from .forms import TemporaryPersonForm
+from .forms import AdminUpdateForm
+from .models import Attendance
+from datetime import datetime
 from .forms import EmployeeForm, EmployeeUpdateForm
 from .forms import GuardForm, GuardUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from .forms import TemporaryPersonForm
-from .models import TemporaryPerson
-from datetime import datetime
+from django.http import JsonResponse
 def index(request):
     return render(request, 'adminhome.html')
 def connect_camera(request):
@@ -153,7 +156,30 @@ def addcamerapage(request):
         success_message = "Camera link added successfully!"
     return render(request, 'addcamera.html', {'success_message': success_message})
 def attendancereportbyadmin(request):
-    return render(request,'attendancereport.html')
+    if request.method == 'POST':
+        selected_date = request.POST.get('startDate')
+        # Fetch attendance data from the database based on the selected date
+        attendance_data = Attendance.objects.filter(date=selected_date)
+        # Define an empty list to store formatted attendance data
+        formatted_attendance = []
+        for attendance in attendance_data:
+            # Check if entry time is after 9 am
+            if attendance.time.hour >= 9:
+                status = 'Absent'
+            # Check if entry time is between 8 and 9 am
+            elif 8 <= attendance.time.hour < 9:
+                status = 'Present'
+            else:
+                status = 'Unknown'
+            # Append formatted data to the list
+            formatted_attendance.append({
+                'person_id': attendance.person_id,
+                'date': attendance.date,
+                'time': attendance.time,
+                'status': status
+            })
+        return render(request, 'attendancereport.html', {'attendance_data': formatted_attendance})
+    return render(request, 'attendancereport.html')
 def registeraccounts(request):
     return render(request,'registeraccount.html')
 def regemployee(request):
@@ -303,16 +329,12 @@ def guardupdate(request):
     else:
         guard = Guard.objects.get(guard_id=request.user.username)
         form = GuardUpdateForm(initial={
-            'phone': employee.phone,
-            'email': employee.email,
-            'address': employee.address,
+            'phone': guard.phone,
+            'email': guard.email,
+            'address': guard.address,
         })
 
     return render(request, 'guardprofile.html', {'form': form})
-
-
-
-
 def add_temporary_person(request):
     success_message = None
     if request.method == 'POST':
@@ -324,9 +346,37 @@ def add_temporary_person(request):
     else:
         form = TemporaryPersonForm()
     return render(request, 'tempperson.html', {'form': form, 'success_message': success_message})
-
+def temporarypersonadmin(request):
+    success_message = None
+    if request.method == 'POST':
+        form = TemporaryPersonForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            success_message = "Person added successfully!"
+            return render(request, 'adminhome.html')
+    else:
+        form = TemporaryPersonForm()
+    return render(request, 'temppersonadmin.html', {'form': form, 'success_message': success_message})
 def remove_expired_photos():
     expired_people = TemporaryPerson.objects.filter(expiration_datetime__lt=datetime.now())
     for person in expired_people:
         person.photo.delete()
         person.delete()
+def adminupdate(request):
+    if request.method == 'POST':
+        form = AdminUpdateForm(request.POST)
+        if form.is_valid():
+            admin =Admin.objects.first()
+            admin.phone = form.cleaned_data['phone']
+            admin.email = form.cleaned_data['email']
+            admin.address = form.cleaned_data['address']
+            admin.save()
+            return redirect('adminprofile')
+    else:
+        form = AdminUpdateForm(initial={
+            'phone': admin.phone,
+            'email': admin.email,
+            'address': admin.address,
+        })
+
+    return render(request, 'adminprofile.html', {'form': form})

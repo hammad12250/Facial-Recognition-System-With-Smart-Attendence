@@ -29,6 +29,14 @@ class Admin(models.Model):
     email = models.EmailField()
     address = models.TextField()
     profile_picture = models.ImageField(upload_to='img/', blank=True, null=True)
+    def save(self, *args, **kwargs):
+        is_new_instance = not self.pk  # Check if it's a new instance (not saved to the database yet)
+        
+        if is_new_instance and self.profile_picture:
+            extension = self.profile_picture.name.split('.')[-1]
+            new_name = f'{self.admin_id}.{extension}'
+            self.profile_picture.name = new_name
+        super().save(*args, **kwargs)
 class Attendance(models.Model):
     person_id = models.IntegerField()
     date = models.DateField()
@@ -54,11 +62,15 @@ class Guard(models.Model):
             self.profile_picture.name = new_name
 
         super().save(*args, **kwargs)
-
-
-
 class TemporaryPerson(models.Model):
     name = models.CharField(max_length=100)
+    person_id = models.CharField(max_length=10)
     reason_for_visiting = models.TextField()
     expiration_datetime = models.DateTimeField()
-    photo = models.ImageField(upload_to='img/')
+    photo = models.ImageField(upload_to='img/',null=True, blank=True)
+    def save(self, *args, **kwargs):
+        if self.photo:
+            extension = self.photo.name.split('.')[-1]
+            new_name = f'{self.person_id}.{extension}'
+            self.photo.name = new_name
+        super().save(*args, **kwargs)

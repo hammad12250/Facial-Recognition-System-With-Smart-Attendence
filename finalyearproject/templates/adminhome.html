@@ -115,7 +115,8 @@
             <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
                 <i class="fas fa-video"></i> Attendance Report
             </button>
-            <button><i class="fas fa-user-clock"></i> Temporary Access</button>
+            <button onclick="window.location.href='{% url 'tempadmin' %}'">
+                <i class="fas fa-video"></i>Temporary Access</button>
             <button onclick="window.location.href='{% url 'registeracc' %}'">
                 <i class="fas fa-video"></i> Register Account
             </button>
@@ -133,11 +134,7 @@
            <img src="{% url 'livecam_feed' %}">    
            
         </div>
-        <div class="intruder-alert">
-            <i class="fas fa-exclamation-circle" style="margin-bottom: 10px;"></i> Intruder Detected<br>
-            <i class="fas fa-exclamation-circle" style="margin-bottom: 10px;"></i> Intruder Detected<br>
-            <i class="fas fa-exclamation-circle"></i> Intruder Detected
-        </div>
+        
     </div>
    
 </body>

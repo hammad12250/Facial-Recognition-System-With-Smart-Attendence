@@ -87,7 +87,7 @@
             width: 100%;
         }
 
-        input[type="submit"] {
+        button[type="submit"] {
             background-color: #4caf50;
             color: white;
             padding: 15px 20px;
@@ -98,7 +98,7 @@
             transition: background-color 0.3s ease;
         }
 
-        input[type="submit"]:hover {
+        button[type="submit"]:hover {
             background-color: #45a049;
         }
         .details-container {
@@ -136,6 +136,20 @@
         .update-button:hover {
             background-color: #45a049; /* Green background color on hover */
         }
+        button#buttonlabel {
+            background-color: #28a745; /* Green */
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button#buttonlabel:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
     </style>
 </head>
     <title>Facial Recognition System with Smart Attendance</title>
@@ -149,7 +163,7 @@
         <div class="navigation">
             <button onclick="window.location.href='{% url 'guardhome' %}'"> <i class="fas fa-sign-out-alt"></i> Home</button>
             <button><i class="fas fa-user"></i> Profile</button>
-            <button><i class="fas fa-user-clock"></i> Temporary Access</button>
+            <button onclick="window.location.href='{% url 'tempperson' %}'"> <i class="fas fa-sign-out-alt"></i>  Temporary Access</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'"> <i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
         <div class="content">

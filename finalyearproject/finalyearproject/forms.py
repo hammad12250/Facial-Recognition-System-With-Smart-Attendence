@@ -1,5 +1,6 @@
 from django import forms
 from .models import Camera
+from .models import Admin
 from .models import Employee
 from .models import Guard
 from .models import TemporaryPerson
@@ -61,11 +62,11 @@ class GuardUpdateForm(forms.Form):
     phone = forms.CharField(max_length=15, required=True)
     email = forms.EmailField(required=True)
     address = forms.CharField(required=True)
-
-
-
-
 class TemporaryPersonForm(forms.ModelForm):
     class Meta:
         model = TemporaryPerson
-        fields = ['name', 'reason_for_visiting', 'expiration_datetime', 'photo']
+        fields = ['name', 'person_id','reason_for_visiting', 'expiration_datetime', 'photo']
+class AdminUpdateForm(forms.Form):
+    phone = forms.CharField(max_length=15, required=True)
+    email = forms.EmailField(required=True)
+    address = forms.CharField(required=True)
