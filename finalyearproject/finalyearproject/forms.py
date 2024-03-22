@@ -66,6 +66,9 @@ class TemporaryPersonForm(forms.ModelForm):
     class Meta:
         model = TemporaryPerson
         fields = ['name', 'person_id','reason_for_visiting', 'expiration_datetime', 'photo']
+        widgets = {
+            'expiration_datetime': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 class AdminUpdateForm(forms.Form):
     phone = forms.CharField(max_length=15, required=True)
     email = forms.EmailField(required=True)

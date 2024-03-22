@@ -41,6 +41,7 @@ urlpatterns = [
     path('employeeupdate', views.employeeupdate, name='empupdate'),
      path('guardupdate', views.guardupdate, name='guardupdate'),
     path('guardprofile', views.guardprofile, name='guardprofile'),
+    path('notifications', views.notifications, name='notifications'),
     path('employeeattendance', views.employeeatt, name='empattendance'),
     path('connect-camera/', views.connect_camera, name='connect_camera'),
    path('', views.index, name='index'),
@@ -52,6 +53,7 @@ urlpatterns = [
       path('adminupdate/', views.adminupdate, name='adminupdate'),
       path('tempperson/', views.add_temporary_person, name='tempperson'),
       path('temppersonadmin/', views.temporarypersonadmin, name='tempadmin'),
+      path('forgetemp', views.forgetemp, name='forgetemp'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

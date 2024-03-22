@@ -1,12 +1,19 @@
 import cv2
 import numpy as np
-from finalyearproject.models import RtspCamera, Attendance
+from finalyearproject.models import RtspCamera, Attendance, Admin
 import face_recognition
 import os
 from datetime import datetime
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
 
 class LiveWebCam(object):
-    def __init__(self):
+    def __init__(self, save_path='intruder_images'):
+        self.save_path = save_path
+        # Create directory if it does not exist
+        os.makedirs(self.save_path, exist_ok=True)
         print("Initializing video capture...")
 
         # Fetching the latest RTSP link from the database
@@ -16,7 +23,7 @@ class LiveWebCam(object):
         if not self.url.isOpened():
             print("Failed to initialize video capture")
             raise Exception("Failed to initialize video capture")
-
+         
         # Load images and their corresponding encodings for face recognition
         self.images, self.classNames = self.load_images('img/img')
         self.encodeListKnown = self.finding_encoding(self.images)
@@ -34,6 +41,52 @@ class LiveWebCam(object):
             # If not marked present today, add a new entry to the Attendance table
             attendance_entry = Attendance(person_id=person_id, date=today, time=datetime.now().time())
             attendance_entry.save()
+
+    def detect_intruder(self, encodesCurFrame):
+        intruder_detected = False
+        for encodeFace in encodesCurFrame:
+            matches = face_recognition.compare_faces(self.encodeListKnown, encodeFace)
+            if not any(matches):
+                intruder_detected = True
+                break
+        return intruder_detected
+
+    def save_image(self, img):
+        file_name = datetime.now().strftime("%Y%m%d%H%M%S") + '.jpg'
+        file_path = os.path.join(self.save_path, file_name)
+        cv2.imwrite(file_path, img)
+
+    def send_email(self, img):
+        try:
+            admin_email = Admin.objects.first().email  # Assuming Admin model has only one entry
+            email_subject = "Intruder Detected!"
+            email_body = "An unknown person has been detected by the security system."
+            # Encode the image as a JPEG byte array
+            img_bytes = cv2.imencode('.jpg', img)[1].tobytes()
+            
+            msg = MIMEMultipart()
+            msg['From'] = admin_email
+            msg['To'] = admin_email
+            msg['Subject'] = email_subject
+
+            # Attach email body
+            msg.attach(MIMEText(email_body, 'plain'))
+
+            # Attach image
+            img_attachment = MIMEImage(img_bytes, _subtype="jpeg")
+            img_attachment.add_header('Content-Disposition', 'attachment', filename='intruder.jpg')
+            msg.attach(img_attachment)
+
+            # Connect to SMTP server and send email
+            smtp_server = smtplib.SMTP('smtp.gmail.com', 587)
+            smtp_server.starttls()
+            smtp_server.login(admin_email, 'znbg mssa pifl gknm')  # Replace 'your_password' with actual password
+            smtp_server.sendmail(admin_email, admin_email, msg.as_string())
+            smtp_server.quit()
+
+            print("Email sent successfully!")
+        except Exception as e:
+            print(f"Error sending email: {e}")
 
     def get_frame(self):
         success, imgNp = self.url.read()
@@ -66,6 +119,11 @@ class LiveWebCam(object):
             cv2.rectangle(imgNp, (x1, y1), (x2, y2), color, 2)
             cv2.rectangle(imgNp, (x1, y2 - 35), (x2, y2), color, cv2.FILLED)
             cv2.putText(imgNp, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
+
+        intruder_detected = self.detect_intruder(encodesCurFrame)
+        if intruder_detected:
+            self.save_image(imgNp)
+            self.send_email(imgNp)
 
         resize = cv2.resize(imgNp, (640, 480), interpolation=cv2.INTER_LINEAR)
         ret, jpeg = cv2.imencode('.jpg', resize)

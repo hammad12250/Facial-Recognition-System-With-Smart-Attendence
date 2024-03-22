@@ -90,7 +90,12 @@ DATABASES = {
         'PORT':'3306',
     }
 }
-
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP server address
+EMAIL_PORT = 587  # Port for Gmail SMTP (587 is commonly used for TLS)
+EMAIL_USE_TLS = True  # Use TLS encryption
+EMAIL_HOST_USER = 'ar256381@gmail.com'  # Your Gmail email address
+EMAIL_HOST_PASSWORD = 'znbg mssa pifl gknm'  # Your Gmail app password
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

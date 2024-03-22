@@ -4,7 +4,7 @@
 from django.shortcuts import render, redirect
 from .forms import CameraForm
 from django.contrib import messages
-
+import os
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, Group
@@ -147,7 +147,33 @@ def loginasguard(request):
 
     return render(request, 'loginguard.html')
 def adminhomepage(request):
-    return render(request,'adminhome.html')
+    # Retrieve the previous list of intruder images from the session
+    prev_intruder_images = request.session.get('intruder_images', [])
+    
+    # Get the current list of intruder images
+    intruder_images = os.listdir('intruder_images')
+
+    # Get creation timestamps for the images
+    timestamps = [datetime.fromtimestamp(os.path.getctime(os.path.join('intruder_images', img))) for img in intruder_images]
+    
+    # Combine image file names and timestamps into a list of tuples
+    intruder_data = zip(intruder_images, timestamps)
+
+    # Check if there are new intruder images
+    intruder_detected = set(intruder_images) - set(prev_intruder_images)
+    
+    # If new intruder images are detected, set a flag to display the message
+    if intruder_detected:
+        request.session['intruder_images'] = intruder_images
+        intruder_detected = True
+    else:
+        intruder_detected = False
+
+    context = {
+        'intruder_data': intruder_data,
+        'intruder_detected': intruder_detected
+    }
+    return render(request, 'adminhome.html', context)
 def addcamerapage(request):
     success_message = None
     if request.method == 'POST':
@@ -380,3 +406,12 @@ def adminupdate(request):
         })
 
     return render(request, 'adminprofile.html', {'form': form})
+def notifications(request):
+    intruder_images = os.listdir('intruder_images')
+    # Get creation timestamps for the images
+    timestamps = [datetime.fromtimestamp(os.path.getctime(os.path.join('intruder_images', img))) for img in intruder_images]
+    # Combine image file names and timestamps into a list of tuples
+    intruder_data = zip(intruder_images, timestamps)
+    return render(request, 'notifications.html', {'intruder_data': intruder_data})
+def forgetemp(request):
+    return render(request, 'forgetpasswordemp.html')
