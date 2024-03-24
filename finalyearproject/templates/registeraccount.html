@@ -109,30 +109,32 @@
         <h1>Facial Recognition System with Smart Attendance</h1>
     </div>
     <div class="container">
-        <div class="navigation">
-            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
-                <i class="fas fa-user"></i> Home</button>
-            <button onclick="window.location.href='{% url 'adminprofile' %}'">
-            <i class="fas fa-user"></i> Profile</button>
-            <button onclick="window.location.href='{% url 'addcamerapage' %}'">
-                <i class="fas fa-video"></i> Add Camera
-            </button>
-            <button><i class="fas fa-bell"></i> Notifications</button>
-            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
-                <i class="fas fa-video"></i> Attendance Report
-            </button>
-            <button><i class="fas fa-user-clock"></i> Temporary Access</button>
-            <button onclick="window.location.href='{% url 'registeracc' %}'">
-                <i class="fas fa-video"></i> Register Account
-            </button>
-            <button onclick="window.location.href='{% url 'addper' %}'">
-                <i class="fas fa-video"></i> Add Person
-            </button>
-            <button onclick="window.location.href='{% url 'employee_list' %}'">
-                <i class="fas fa-user-plus"></i> Employees List</button>
-            <button onclick="window.location.href='{% url 'loginoptions' %}'">
-            <i class="fas fa-sign-out-alt"></i> Logout</button>
-        </div>
+    <div class="navigation">
+        <button onclick="window.location.href='{% url 'adminhomepage' %}'">
+            <i class="fas fa-user"></i> Home</button>
+        <button onclick="window.location.href='{% url 'adminprofile' %}'">
+        <i class="fas fa-user"></i> Profile</button>
+        <button onclick="window.location.href='{% url 'addcamerapage' %}'">
+            <i class="fas fa-video"></i> Add Camera
+        </button>
+        <button onclick="window.location.href='{% url 'notifications' %}'">
+            <i class="fas fa-video"></i> Notifications</button>
+        <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
+            <i class="fas fa-video"></i> Attendance Report
+        </button>
+        <button onclick="window.location.href='{% url 'tempadmin' %}'">
+            <i class="fas fa-video"></i>Temporary Access</button>
+        <button onclick="window.location.href='{% url 'registeracc' %}'">
+            <i class="fas fa-video"></i> Register Account
+        </button>
+        <button onclick="window.location.href='{% url 'addper' %}'">
+            <i class="fas fa-video"></i> Add Person
+        </button>
+        <button onclick="window.location.href='{% url 'employee_list' %}'">
+            <i class="fas fa-user-plus"></i> Employees List</button>
+        <button onclick="window.location.href='{% url 'loginoptions' %}'">
+        <i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
        
         <div class="content">
             <button onclick="window.location.href='{% url 'registerguard' %}'" style="padding: 15px 30px; margin-top: 20px;"><i class="fas fa-users"></i>Register Guard Account</button>

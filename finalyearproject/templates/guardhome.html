@@ -103,13 +103,17 @@
     </div>
     <div class="container">
         <div class="navigation">
-            <button><i class="fas fa-home"></i> Home</button>
+            <button onclick="window.location.href='{% url 'guardhome' %}'"> <i class="fas fa-sign-out-alt"></i> Home</button>
             <button onclick="window.location.href='{% url 'guardprofile' %}'"> <i class="fas fa-sign-out-alt"></i>Profile</button>
             <button onclick="window.location.href='{% url 'tempperson' %}'"> <i class="fas fa-sign-out-alt"></i> Temporary Access</button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'"> <i class="fas fa-sign-out-alt"></i> Logout</button>
-        <div class="live-feed">
-        </div>
     </div>
+    <div class="live-feed">
+           
+            
+        <img src="{% url 'livecam_feed' %}">    
+        
+     </div>
 </body>
 
 </html>
