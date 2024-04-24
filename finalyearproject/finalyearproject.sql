@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2024 at 09:50 AM
+-- Generation Time: Apr 24, 2024 at 10:13 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -117,7 +117,11 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (45, 'Can add guard', 12, 'add_guard'),
 (46, 'Can change guard', 12, 'change_guard'),
 (47, 'Can delete guard', 12, 'delete_guard'),
-(48, 'Can view guard', 12, 'view_guard');
+(48, 'Can view guard', 12, 'view_guard'),
+(49, 'Can add temporary person', 13, 'add_temporaryperson'),
+(50, 'Can change temporary person', 13, 'change_temporaryperson'),
+(51, 'Can delete temporary person', 13, 'delete_temporaryperson'),
+(52, 'Can view temporary person', 13, 'view_temporaryperson');
 
 -- --------------------------------------------------------
 
@@ -144,8 +148,9 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-03-10 08:41:51.875171', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
-(30, 'pbkdf2_sha256$600000$fnhbO33dsVcX7qw1Fi7q00$5h4G18f0+vlKc16ZN4YOW02HeneZiJyO7lfGcsFfV+0=', '2024-03-10 08:39:10.882373', 0, '16', '', '', '', 0, 1, '2024-03-10 08:07:50.867152');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-04-24 08:06:06.737553', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
+(30, 'pbkdf2_sha256$600000$fnhbO33dsVcX7qw1Fi7q00$5h4G18f0+vlKc16ZN4YOW02HeneZiJyO7lfGcsFfV+0=', '2024-03-23 08:03:18.743890', 0, '16', '', '', '', 0, 1, '2024-03-10 08:07:50.867152'),
+(32, 'pbkdf2_sha256$600000$yLTorH3NNcEFPeAnxbYt8N$cWfPmX9+r2cl0PkS5LsJUQgR4YQRS4uXKGX3gYFlJB0=', '2024-04-24 08:11:46.206882', 0, '10', '', '', '', 0, 1, '2024-03-29 08:41:41.286927');
 
 -- --------------------------------------------------------
 
@@ -164,7 +169,8 @@ CREATE TABLE `auth_user_groups` (
 --
 
 INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(24, 30, 2);
+(24, 30, 2),
+(26, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -231,6 +237,7 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (9, 'finalyearproject', 'employee'),
 (12, 'finalyearproject', 'guard'),
 (7, 'finalyearproject', 'rtspcamera'),
+(13, 'finalyearproject', 'temporaryperson'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -277,7 +284,8 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (24, 'finalyearproject', '0006_attendance', '2024-01-14 11:20:53.440536'),
 (25, 'finalyearproject', '0007_alter_attendance_person_id', '2024-01-15 15:10:57.697942'),
 (26, 'finalyearproject', '0008_alter_attendance_person_id', '2024-02-09 09:29:36.756549'),
-(27, 'finalyearproject', '0009_guard', '2024-03-08 10:52:26.441520');
+(27, 'finalyearproject', '0009_guard', '2024-03-08 10:52:26.441520'),
+(28, 'finalyearproject', '0010_temporaryperson', '2024-03-13 07:28:42.768098');
 
 -- --------------------------------------------------------
 
@@ -296,12 +304,13 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('00vu98oloqa99wvhieoxflmknw64xp3a', '.eJxVjEEOwiAQRe_C2hBgoDAu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWYMTpd0yUH9x2Uu7UbrPMc1uXKcldkQft8joXfl4O9--gUq_fOigbjFLZppEteBd4JF14QIfgFOZMqiREoOwMAWgfvCetVQDPA1sU7w_zfzdO:1rzXjG:XC4uggn_tPDIp_wHwYVmv8wZH7EphO2zmcrXmALo7Lc', '2024-05-08 08:11:46.254211'),
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
-('71z6e34kul03t7tzm1x44j0dnrudcaso', '.eJxVjMEKwyAQRP_FcxFFcbXH3vsNsrprTVsUYnIK_fcmkEN7G-a9mU1EXJca18FznEhchdHi8lsmzC9uB6EntkeXubdlnpI8FHnSIe-d-H073b-DiqPu6-Ccz-SzV1yCgpJKYHBYLNg9a3YqYdIqA1rUBGTJAHLSpqjgVNHi8wUsNjj7:1rjEp3:Dz4IGxJCk0p_5GvErxTHtveqtZQrOt2lJ81X5UAMuzg', '2024-03-24 08:46:21.349104'),
 ('a2qj45haf9yx6csf7qrz85fmn1sgs3l2', '.eJxVjMsOwiAQRf-FtSHQYRBcuvcbCI8ZqRqalHZl_HfbpAvd3nPOfYsQ16WGtdMcxiIuQqM4_Y4p5ie1nZRHbPdJ5qkt85jkrsiDdnmbCr2uh_t3UGOvW41gDTCy88Um6yyDMpodK5OMgozESGfS2rMqjBGiH4B03opBFW1AfL74_jfc:1rOzqa:a8E_ffe36daN7V9MUo75yHIFomU_tTQw7LXrdTUfl-E', '2024-01-28 12:44:16.828711'),
 ('ggdqw0i3h5hfa06sc6b1f0jv7lerddc6', '.eJxVjDsOwjAQBe_iGllerze2KelzBsvrDw6gRMqnQtydREoB7ZuZ9xYhbmsL21LmMGRxFYDi8jtyTM8yHiQ_4nifZJrGdR5YHoo86SL7KZfX7XT_Dlpc2l4jdAUrZQLjwFFKoE20FDV7UFyhQqHa1YqsjCX01rB1e6CzIkTP4vMF7cc3Qw:1rH1rY:TodvoCJah-laweNQENZNRWK22ludc13LgYiczqHwryc', '2024-01-06 13:16:20.887945'),
 ('h8lolg3b1rsp1avt2zty94ah98rsjesf', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rPfd0:lUZIbRdK_fBGFkDWKlmJVsO1Hv3i5anEnTUI-5GtVh4', '2024-01-30 09:21:02.752419'),
 ('je9m22o9149iyv3k6mgp8ctc9z68swr2', '.eJxVjDsOAiEUAO9CbQj_j6X9noE8HiCrBpJltzLe3ZBsoe3MZN4kwLHXcIy8hTWRK-GKXH5hBHzmNk16QLt3ir3t2xrpTOhpB116yq_b2f4NKow6vyZy40Dr4lGzLEH4Atwa54vj6AqiSRllLMqwqITRRYKWEIVNliUmyecLC6s4NQ:1rH2t6:qYAn2xzo9Ndvmf9gANxiM_uou6Buo4XGuJoXLXV7xVQ', '2024-01-06 14:22:00.672951'),
+('pst1zgq9itiawxkdk1zeg3nsc0cqugou', '.eJxVjEEOwiAQRe_C2hBgoDAu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWYMTpd0yUH9x2Uu7UbrPMc1uXKcldkQft8joXfl4O9--gUq_fOigbjFLZppEteBd4JF14QIfgFOZMqiREoOwMAWgfvCetVQDPA1sU7w_zfzdO:1rq7pQ:4nCFlBCDyZ-CuvKrr2Qv5YviO_yQ_VuwIZ_sSyLYNmA', '2024-04-12 08:43:12.293609'),
 ('sjb5o64evjlqqv0xw24yl3mdpcz9efz0', '.eJxVjEEOwiAQRe_C2hCmIENduu8ZyACDVA0kpV0Z765NutDtf-_9l_C0rcVvnRc_J3ERWonT7xgoPrjuJN2p3pqMra7LHOSuyIN2ObXEz-vh_h0U6uVbA1qFxEZbh0BGs405UQY12vHMCgcGhDwEpSllhw4zawsuWTKKGUi8P_GVN9Y:1rjEOs:7JSoZzipcGPvfrj6TEISwFd-Lm2F-kfUuCawyaSXB1g', '2024-03-24 08:19:18.513904'),
 ('y70nuar7yhlmqi97wqr3mtyj0fiw5td7', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rYOSA:bAwbCVuQCyOBSRjoouL6ZEDu7mVW40ZIqa4hh73Uh3g', '2024-02-23 10:49:54.859420');
 
@@ -326,7 +335,7 @@ CREATE TABLE `finalyearproject_admin` (
 --
 
 INSERT INTO `finalyearproject_admin` (`id`, `name`, `admin_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
-(1, 'Admin', 'A1', '123', 'abc@gmail.com', 'babna', 'Admin-removebg-preview (1).png');
+(1, 'Admin', '1', '11111112', 'alirazanaveed28@gmail.com', 'a', 'img/1.jpg');
 
 -- --------------------------------------------------------
 
@@ -346,7 +355,7 @@ CREATE TABLE `finalyearproject_attendance` (
 --
 
 INSERT INTO `finalyearproject_attendance` (`id`, `person_id`, `date`, `time`) VALUES
-(2, 10, '2024-01-14', '17:15:26.983638');
+(1, 10, '2024-04-24', '13:11:28.000000');
 
 -- --------------------------------------------------------
 
@@ -375,6 +384,13 @@ CREATE TABLE `finalyearproject_employee` (
   `profile_picture` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `finalyearproject_employee`
+--
+
+INSERT INTO `finalyearproject_employee` (`id`, `name`, `employee_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
+(41, 'Employee', '10', '123221', 'hidayetachak@gmail.com', 'xnmx bmw', 'img/10.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -396,7 +412,7 @@ CREATE TABLE `finalyearproject_guard` (
 --
 
 INSERT INTO `finalyearproject_guard` (`id`, `name`, `guard_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
-(13, 'employee', '16', '123445n', 'ar256381@gmail.com', 'aa', 'img/16.jpg');
+(13, 'employee', '16', '123445nms', 'ar256381@gmail.com', 'aa', 'img/16.jpg');
 
 -- --------------------------------------------------------
 
@@ -414,24 +430,53 @@ CREATE TABLE `finalyearproject_rtspcamera` (
 --
 
 INSERT INTO `finalyearproject_rtspcamera` (`id`, `camera_link`) VALUES
-(47, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(48, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(49, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(50, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(51, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(52, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(53, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(54, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(55, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(56, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(57, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(58, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(59, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(60, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(61, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(62, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(63, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
-(64, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp');
+(65, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(66, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(67, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(68, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(69, 'rtsp://192.168.0.110/h264_ulaw.sdp'),
+(70, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(71, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(72, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(73, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(74, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(75, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(76, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(77, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(78, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(79, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(80, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(81, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(82, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(83, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(84, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(85, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(86, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(87, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(88, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(89, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(90, 'rtsp://192.168.0.110:8080/h264_ulaw.sdp'),
+(91, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(92, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(93, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(94, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(95, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(96, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `finalyearproject_temporaryperson`
+--
+
+CREATE TABLE `finalyearproject_temporaryperson` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `person_id` varchar(10) NOT NULL,
+  `reason_for_visiting` longtext NOT NULL,
+  `expiration_datetime` datetime(6) NOT NULL,
+  `photo` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -548,6 +593,12 @@ ALTER TABLE `finalyearproject_rtspcamera`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `finalyearproject_temporaryperson`
+--
+ALTER TABLE `finalyearproject_temporaryperson`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -567,19 +618,19 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT for table `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -597,13 +648,13 @@ ALTER TABLE `django_admin_log`
 -- AUTO_INCREMENT for table `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_admin`
@@ -615,7 +666,7 @@ ALTER TABLE `finalyearproject_admin`
 -- AUTO_INCREMENT for table `finalyearproject_attendance`
 --
 ALTER TABLE `finalyearproject_attendance`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_camera`
@@ -627,7 +678,7 @@ ALTER TABLE `finalyearproject_camera`
 -- AUTO_INCREMENT for table `finalyearproject_employee`
 --
 ALTER TABLE `finalyearproject_employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_guard`
@@ -639,7 +690,13 @@ ALTER TABLE `finalyearproject_guard`
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`
 --
 ALTER TABLE `finalyearproject_rtspcamera`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+
+--
+-- AUTO_INCREMENT for table `finalyearproject_temporaryperson`
+--
+ALTER TABLE `finalyearproject_temporaryperson`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables

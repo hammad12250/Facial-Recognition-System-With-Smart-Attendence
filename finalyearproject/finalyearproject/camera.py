@@ -58,6 +58,7 @@ class LiveWebCam(object):
 
     def send_email(self, img):
         try:
+            sender_email = "ar256381@gmail.com"
             admin_email = Admin.objects.first().email  # Assuming Admin model has only one entry
             email_subject = "Intruder Detected!"
             email_body = "An unknown person has been detected by the security system."
@@ -65,7 +66,7 @@ class LiveWebCam(object):
             img_bytes = cv2.imencode('.jpg', img)[1].tobytes()
             
             msg = MIMEMultipart()
-            msg['From'] = admin_email
+            msg['From'] = sender_email
             msg['To'] = admin_email
             msg['Subject'] = email_subject
 
@@ -80,8 +81,8 @@ class LiveWebCam(object):
             # Connect to SMTP server and send email
             smtp_server = smtplib.SMTP('smtp.gmail.com', 587)
             smtp_server.starttls()
-            smtp_server.login(admin_email, 'znbg mssa pifl gknm')  # Replace 'your_password' with actual password
-            smtp_server.sendmail(admin_email, admin_email, msg.as_string())
+            smtp_server.login(sender_email, 'znbg mssa pifl gknm')  # Replace 'your_password' with actual password
+            smtp_server.sendmail(sender_email, admin_email, msg.as_string())
             smtp_server.quit()
 
             print("Email sent successfully!")

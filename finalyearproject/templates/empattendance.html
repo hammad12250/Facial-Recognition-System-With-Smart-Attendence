@@ -212,9 +212,9 @@
             <tr>
                 <td>{{ entry.date }}</td>
                 <td>
-                    {% if entry.time.hour >= 9 %}
+                    {% if entry.time.hour >= 5 %}
                         Absent
-                    {% elif 8 <= entry.time.hour < 9 %}
+                    {% elif 8 <= entry.time.hour < 5 %}
                         Present
 
                     {% endif %}

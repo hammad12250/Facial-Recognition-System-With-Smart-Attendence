@@ -189,11 +189,11 @@ def attendancereportbyadmin(request):
         # Define an empty list to store formatted attendance data
         formatted_attendance = []
         for attendance in attendance_data:
-            # Check if entry time is after 9 am
-            if attendance.time.hour >= 9:
+            # Check if entry time is after 5 am
+            if attendance.time.hour >= 5:
                 status = 'Absent'
-            # Check if entry time is between 8 and 9 am
-            elif 8 <= attendance.time.hour < 9:
+            # Check if entry time is between 8 and 5 am
+            elif 8 <= attendance.time.hour < 5:
                 status = 'Present'
             else:
                 status = 'Unknown'
@@ -283,7 +283,10 @@ def employeeatt(request):
     username = request.user.username
     employee_data = Employee.objects.get(employee_id=username)
     attendance_data = Attendance.objects.filter(person_id=username)
-    return render(request, 'empattendance.html')
+    context = {
+        'attendance_data': attendance_data  # Pass attendance_data to the template
+    }
+    return render(request, 'empattendance.html', context)
 def guardhome(request):
     # Assuming the Employee model has a field named 'employee_id'
     username = request.user.username
