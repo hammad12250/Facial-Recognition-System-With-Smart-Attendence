@@ -148,7 +148,11 @@
                     {{ success_message }}
                 </div>
             {% endif %}
-        
+            {% if error_message %}
+            <div class="alert alert-danger">
+                {{ error_message }}
+            </div>
+            {% endif %} 
             <form action="{% url 'addcamerapage' %}" method="post">
                 {% csrf_token %}
                 <label for="cameraLink" class="camera-input">Camera Link:</label>

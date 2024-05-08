@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2024 at 10:13 AM
+-- Generation Time: May 08, 2024 at 10:41 AM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.10
 
@@ -148,9 +148,7 @@ CREATE TABLE `auth_user` (
 --
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-04-24 08:06:06.737553', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409'),
-(30, 'pbkdf2_sha256$600000$fnhbO33dsVcX7qw1Fi7q00$5h4G18f0+vlKc16ZN4YOW02HeneZiJyO7lfGcsFfV+0=', '2024-03-23 08:03:18.743890', 0, '16', '', '', '', 0, 1, '2024-03-10 08:07:50.867152'),
-(32, 'pbkdf2_sha256$600000$yLTorH3NNcEFPeAnxbYt8N$cWfPmX9+r2cl0PkS5LsJUQgR4YQRS4uXKGX3gYFlJB0=', '2024-04-24 08:11:46.206882', 0, '10', '', '', '', 0, 1, '2024-03-29 08:41:41.286927');
+(2, 'pbkdf2_sha256$600000$Mz7Y06yqpTbYzBmUfbYuzM$hokultBKRP5UdCr7Ax5O6F7lc1bo4epKeyktjsKfge4=', '2024-05-08 08:37:06.380486', 1, 'Admin', '', '', 'ar256381@gmail.com', 1, 1, '2023-12-12 12:43:14.882409');
 
 -- --------------------------------------------------------
 
@@ -163,14 +161,6 @@ CREATE TABLE `auth_user_groups` (
   `user_id` int(11) NOT NULL,
   `group_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `auth_user_groups`
---
-
-INSERT INTO `auth_user_groups` (`id`, `user_id`, `group_id`) VALUES
-(24, 30, 2),
-(26, 32, 1);
 
 -- --------------------------------------------------------
 
@@ -304,9 +294,9 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('00vu98oloqa99wvhieoxflmknw64xp3a', '.eJxVjEEOwiAQRe_C2hBgoDAu3XsGMsBUqoYmpV0Z765NutDtf-_9l4i0rTVunZc4FXEWYMTpd0yUH9x2Uu7UbrPMc1uXKcldkQft8joXfl4O9--gUq_fOigbjFLZppEteBd4JF14QIfgFOZMqiREoOwMAWgfvCetVQDPA1sU7w_zfzdO:1rzXjG:XC4uggn_tPDIp_wHwYVmv8wZH7EphO2zmcrXmALo7Lc', '2024-05-08 08:11:46.254211'),
 ('48kfjfj2o6dlbah8qsbd8dyma2l6zapr', 'e30:1rD27u:fPXuwqpd8tNbrJxypTxHT-cm0e6hwguv7K4U2MuoBqg', '2023-12-26 12:44:42.541178'),
 ('a2qj45haf9yx6csf7qrz85fmn1sgs3l2', '.eJxVjMsOwiAQRf-FtSHQYRBcuvcbCI8ZqRqalHZl_HfbpAvd3nPOfYsQ16WGtdMcxiIuQqM4_Y4p5ie1nZRHbPdJ5qkt85jkrsiDdnmbCr2uh_t3UGOvW41gDTCy88Um6yyDMpodK5OMgozESGfS2rMqjBGiH4B03opBFW1AfL74_jfc:1rOzqa:a8E_ffe36daN7V9MUo75yHIFomU_tTQw7LXrdTUfl-E', '2024-01-28 12:44:16.828711'),
+('aukifp0y2u0mqfpxnvyivib7w1wpfi8z', '.eJxtjktuwzAMRO-idSGIFGlJWXbfExSFQetjO23sIo5XRe9eGc0igb1982bIH9XKehvadcnXdkzqpFC9PLJO4meetiCdZepnHefpdh07vSn6ni76bU756_XuPg0Msgy1zY6xMGYPEgQ8U4rkIDmI4rtgohTvG1sk1shjiNyAL0GSK1i64qWOjvXwmrY_L9LnRZ3eFRokQ0iAzBz0-buv3gNszBG0T5CNBySy7gAy7CAb2JkWrNltVki0h3RUJ_t_6OP3D1iObhk:1s4cnS:A4cLbU9MQ-8RmMuNGWsjyGfSU3JU5yndhuTwBDDnwAk', '2024-05-22 08:37:06.466307'),
 ('ggdqw0i3h5hfa06sc6b1f0jv7lerddc6', '.eJxVjDsOwjAQBe_iGllerze2KelzBsvrDw6gRMqnQtydREoB7ZuZ9xYhbmsL21LmMGRxFYDi8jtyTM8yHiQ_4nifZJrGdR5YHoo86SL7KZfX7XT_Dlpc2l4jdAUrZQLjwFFKoE20FDV7UFyhQqHa1YqsjCX01rB1e6CzIkTP4vMF7cc3Qw:1rH1rY:TodvoCJah-laweNQENZNRWK22ludc13LgYiczqHwryc', '2024-01-06 13:16:20.887945'),
 ('h8lolg3b1rsp1avt2zty94ah98rsjesf', '.eJxVjEEOwiAQRe_C2hDBUgaX7nsGMswwUjU0Ke3KeHfbpAvd_vfef6uI61Li2vIcR1ZXZdXpd0tIz1x3wA-s90nTVJd5THpX9EGbHibOr9vh_h0UbGWrnXdWnM1gMKAB1zF13rA3hJDCmVAA-osgbQhsINcbkIDsxUoSQPX5AtgyOCE:1rPfd0:lUZIbRdK_fBGFkDWKlmJVsO1Hv3i5anEnTUI-5GtVh4', '2024-01-30 09:21:02.752419'),
 ('je9m22o9149iyv3k6mgp8ctc9z68swr2', '.eJxVjDsOAiEUAO9CbQj_j6X9noE8HiCrBpJltzLe3ZBsoe3MZN4kwLHXcIy8hTWRK-GKXH5hBHzmNk16QLt3ir3t2xrpTOhpB116yq_b2f4NKow6vyZy40Dr4lGzLEH4Atwa54vj6AqiSRllLMqwqITRRYKWEIVNliUmyecLC6s4NQ:1rH2t6:qYAn2xzo9Ndvmf9gANxiM_uou6Buo4XGuJoXLXV7xVQ', '2024-01-06 14:22:00.672951'),
@@ -384,13 +374,6 @@ CREATE TABLE `finalyearproject_employee` (
   `profile_picture` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `finalyearproject_employee`
---
-
-INSERT INTO `finalyearproject_employee` (`id`, `name`, `employee_id`, `phone`, `email`, `address`, `profile_picture`) VALUES
-(41, 'Employee', '10', '123221', 'hidayetachak@gmail.com', 'xnmx bmw', 'img/10.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -461,7 +444,29 @@ INSERT INTO `finalyearproject_rtspcamera` (`id`, `camera_link`) VALUES
 (93, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
 (94, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
 (95, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
-(96, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp');
+(96, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(97, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(98, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(99, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(100, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(101, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(102, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(103, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(104, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(105, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(106, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(107, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(108, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(109, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(110, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(111, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(112, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(113, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(114, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(115, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(116, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(117, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp'),
+(118, 'rtsp://192.168.0.107:8080/h264_ulaw.sdp');
 
 -- --------------------------------------------------------
 
@@ -624,13 +629,13 @@ ALTER TABLE `auth_permission`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `auth_user_groups`
 --
 ALTER TABLE `auth_user_groups`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `auth_user_user_permissions`
@@ -666,7 +671,7 @@ ALTER TABLE `finalyearproject_admin`
 -- AUTO_INCREMENT for table `finalyearproject_attendance`
 --
 ALTER TABLE `finalyearproject_attendance`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_camera`
@@ -678,7 +683,7 @@ ALTER TABLE `finalyearproject_camera`
 -- AUTO_INCREMENT for table `finalyearproject_employee`
 --
 ALTER TABLE `finalyearproject_employee`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_guard`
@@ -690,7 +695,7 @@ ALTER TABLE `finalyearproject_guard`
 -- AUTO_INCREMENT for table `finalyearproject_rtspcamera`
 --
 ALTER TABLE `finalyearproject_rtspcamera`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `finalyearproject_temporaryperson`

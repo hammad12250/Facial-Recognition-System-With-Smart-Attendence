@@ -178,8 +178,12 @@ def addcamerapage(request):
     success_message = None
     if request.method == 'POST':
         camera_link = request.POST.get('cameraLink')
-        RtspCamera.objects.create(camera_link=camera_link)
-        success_message = "Camera link added successfully!"
+        if camera_link.startswith('rtsp'):
+            RtspCamera.objects.create(camera_link=camera_link)
+            success_message = "Camera link added successfully!"
+        else:
+            error_message = "Invalid camera link format. Please enter a link starting with 'rtsp'."
+            return render(request, 'addcamera.html', {'error_message': error_message})
     return render(request, 'addcamera.html', {'success_message': success_message})
 def attendancereportbyadmin(request):
     if request.method == 'POST':
