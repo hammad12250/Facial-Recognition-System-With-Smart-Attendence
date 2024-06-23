@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# Celery settings
 
 INSTALLED_APPS = [
     'django.contrib.admin',

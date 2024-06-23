@@ -1,6 +1,10 @@
 # <<<<<<< HEAD
 import os
 from django.db import models
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from datetime import datetime
 
 class Camera(models.Model):
     camera_link = models.CharField(max_length=255)

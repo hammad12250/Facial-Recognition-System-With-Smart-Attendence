@@ -1,6 +1,6 @@
 # <<<<<<< HEAD
 
-
+import re
 from django.shortcuts import render, redirect
 from .forms import CameraForm
 from django.contrib import messages
@@ -56,6 +56,8 @@ def employee_list(request):
     return render(request, 'employee_list.html', {'employees': employees})
 def add_employee(request):
     success_message = None
+    form = EmployeeForm()
+    
     if request.method == 'POST':
         form = EmployeeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -69,12 +71,8 @@ def add_employee(request):
                 return redirect('employee_list')
         else:
             messages.error(request, 'Error adding employee. Please check the form.')
-            print(form.errors)
-    else:
-        form = EmployeeForm()
 
     return render(request, 'addemployee.html', {'form': form, 'success_message': success_message})
-
 def loginoptions(request):
     return render(request, 'loginas.html')
 def loginasadmin(request):
@@ -213,12 +211,38 @@ def attendancereportbyadmin(request):
 def registeraccounts(request):
     return render(request,'registeraccount.html')
 def regemployee(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
+        # Validate ID (username)
+        if not username.isdigit():
+            messages.error(request, 'ID must be an integer.')
+            return render(request, 'registeremployee.html')
+        
+        if len(username) < 4:
+            messages.error(request, 'ID must have 4 or more digits.')
+            return render(request, 'registeremployee.html')
+        
+        # Validate password
+        if len(password) < 8:
+            messages.error(request, 'Password must be at least 8 characters long.')
+            return render(request, 'registeremployee.html')
+        
+        if not re.search(r'\d', password):
+            messages.error(request, 'Password must contain at least one number.')
+            return render(request, 'registeremployee.html')
+        
+        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+            messages.error(request, 'Password must contain at least one special character.')
+            return render(request, 'registeremployee.html')
+        
+        # Check if username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists. Please choose a different username.')
             return render(request, 'registeremployee.html')
+        
+        # Create the new user
         new_user = User.objects.create_user(username=username, password=password)
         employee_group, created = Group.objects.get_or_create(name='employee')
         new_user.groups.add(employee_group)
@@ -226,7 +250,7 @@ def regemployee(request):
         messages.success(request, 'Employee account created successfully!')
         return redirect('registeremp')
 
-     return render(request,'registeremployee.html')
+    return render(request, 'registeremployee.html')
 def addperson(request):
      return render(request,'addperson.html')
 @csrf_protect
@@ -297,18 +321,46 @@ def guardhome(request):
     guard_data = Guard.objects.get(guard_id=username)
     return render(request, 'guardhome.html')
 def regguard(request):
-     if request.method == 'POST':
+    if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
+        # Validate ID (username)
+        if not username.isdigit():
+            messages.error(request, 'ID must be an integer.')
+            return render(request, 'registerguard.html')
+        
+        if len(username) < 4:
+            messages.error(request, 'ID must have 4 or more digits.')
+            return render(request, 'registerguard.html')
+        
+        # Validate password
+        if len(password) < 8:
+            messages.error(request, 'Password must be at least 8 characters long.')
+            return render(request, 'registerguard.html')
+        
+        if not re.search(r'\d', password):
+            messages.error(request, 'Password must contain at least one number.')
+            return render(request, 'registerguard.html')
+        
+        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+            messages.error(request, 'Password must contain at least one special character.')
+            return render(request, 'registerguard.html')
+        
+        # Check if username already exists
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username already exists. Please choose a different username.')
             return render(request, 'registerguard.html')
+        
+        # Create the new user
         new_user = User.objects.create_user(username=username, password=password)
-        Guard_group, created = Group.objects.get_or_create(name='Guard')
-        new_user.groups.add(Guard_group)
+        guard_group, created = Group.objects.get_or_create(name='Guard')
+        new_user.groups.add(guard_group)
+        
         messages.success(request, 'Guard account created successfully!')
         return redirect('registerguard')
-     return render(request,'registerGuard.html')  
+
+    return render(request, 'registerguard.html')
  
 def add_Guard(request):
     success_message = None
@@ -325,7 +377,6 @@ def add_Guard(request):
                 return redirect('addguard')
         else:
             messages.error(request, 'Error adding guard. Please check the form.')
-            print(form.errors)
     else:
         form = GuardForm()
 
@@ -370,27 +421,46 @@ def guardupdate(request):
     return render(request, 'guardprofile.html', {'form': form})
 def add_temporary_person(request):
     success_message = None
+    error_message = None
+
     if request.method == 'POST':
         form = TemporaryPersonForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             success_message = "Person added successfully!"
-            return render(request, 'guardhome.html')
+            form = TemporaryPersonForm()  # Reset the form after success
+        else:
+            error_message = form.errors  # Capture validation errors
+
     else:
         form = TemporaryPersonForm()
-    return render(request, 'tempperson.html', {'form': form, 'success_message': success_message})
+
+    return render(request, 'tempperson.html', {
+        'form': form,
+        'success_message': success_message,
+        'error_message': error_message,
+    })
 def temporarypersonadmin(request):
     success_message = None
+    error_message = None
+
     if request.method == 'POST':
         form = TemporaryPersonForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             success_message = "Person added successfully!"
-            return render(request, 'adminhome.html')
+            return render(request, 'temppersonadmin.html', {'success_message': success_message})
+        else:
+            error_message = form.errors  # Capture validation errors
     else:
         form = TemporaryPersonForm()
-    return render(request, 'temppersonadmin.html', {'form': form, 'success_message': success_message})
-def remove_expired_photos():
+
+    return render(request, 'temppersonadmin.html', {
+        'form': form,
+        'success_message': success_message,
+        'error_message': error_message,
+    })
+def remove_expired_people():
     expired_people = TemporaryPerson.objects.filter(expiration_datetime__lt=datetime.now())
     for person in expired_people:
         person.photo.delete()

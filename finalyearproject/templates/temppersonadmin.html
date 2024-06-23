@@ -1,8 +1,6 @@
-!{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
 
 <head>
     <meta charset="UTF-8">
@@ -70,6 +68,7 @@
         .navigation button:hover {
             background: #555;
         }
+
         .content {
             flex: 1; /* Take remaining vertical space in the container */
             padding: 20px;
@@ -83,15 +82,18 @@
             width: 100%;
             text-align: center;
         }
+
         form {
             max-width: 400px;
             margin: 0 auto;
         }
+
         label,
         input {
             margin-bottom: 15px;
             width: 100%;
         }
+
         button[type="submit"] {
             background-color: #4caf50;
             color: white;
@@ -104,16 +106,10 @@
             width: 100%; /* Ensure the button takes full width */
             margin-top: 20px; /* Add margin at the top */
         }
-        
+
         button[type="submit"]:hover {
             background-color: #45a049;
         }
-        
-        .details-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
 
         .details-container {
             display: flex;
@@ -121,20 +117,17 @@
             align-items: center;
         }
 
-        .details {
-            margin-top: 20px;
-            text-align: left;
+        img {
+            max-width: 100%;
+            border: 4px solid #000; /* Black border */
+            border-radius: 50%; /* Make the image circular */
+            margin-top: 10px;
         }
-    img {
-        max-width: 100%;
-        border: 4px solid #000; /* Black border */
-        border-radius: 50%; /* Make the image circular */
-        margin-top: 10px;
-       }
 
         .update-button {
             margin-top: 20px;
         }
+
         .update-button {
             margin-top: 20px;
             background-color: #4caf50; /* Default button background color */
@@ -150,6 +143,7 @@
         .update-button:hover {
             background-color: #45a049; /* Green background color on hover */
         }
+
         .details-container input {
             margin-bottom: 15px;
             padding: 10px;
@@ -158,16 +152,9 @@
             width: 100%;
         }
     </style>
-    <title>Facial Recognition System with Smart Attendance</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Temporary Person</title>
-    <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Include jQuery UI -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <!-- Include jQuery UI Timepicker addon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
     <script>
@@ -185,30 +172,31 @@
         });
     </script>
 </head>
-    <title>Facial Recognition System with Smart Attendance</title>
-</head>
 
 <body>
     <div class="header">
         <h1>Facial Recognition System with Smart Attendance</h1>
-    
     </div>
     <div class="container">
         <div class="navigation">
             <button onclick="window.location.href='{% url 'adminhomepage' %}'">
-                <i class="fas fa-user"></i> Home</button>
+                <i class="fas fa-user"></i> Home
+            </button>
             <button onclick="window.location.href='{% url 'adminprofile' %}'">
-            <i class="fas fa-user"></i> Profile</button>
+                <i class="fas fa-user"></i> Profile
+            </button>
             <button onclick="window.location.href='{% url 'addcamerapage' %}'">
                 <i class="fas fa-video"></i> Add Camera
             </button>
             <button onclick="window.location.href='{% url 'notifications' %}'">
-                <i class="fas fa-video"></i> Notifications</button>
+                <i class="fas fa-video"></i> Notifications
+            </button>
             <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
                 <i class="fas fa-video"></i> Attendance Report
             </button>
             <button onclick="window.location.href='{% url 'tempadmin' %}'">
-                <i class="fas fa-video"></i>Temporary Access</button>
+                <i class="fas fa-video"></i> Temporary Access
+            </button>
             <button onclick="window.location.href='{% url 'registeracc' %}'">
                 <i class="fas fa-video"></i> Register Account
             </button>
@@ -216,12 +204,30 @@
                 <i class="fas fa-video"></i> Add Person
             </button>
             <button onclick="window.location.href='{% url 'employee_list' %}'">
-                <i class="fas fa-user-plus"></i> Employees List</button>
+                <i class="fas fa-user-plus"></i> Employees List
+            </button>
             <button onclick="window.location.href='{% url 'loginoptions' %}'">
-            <i class="fas fa-sign-out-alt"></i> Logout</button>
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
         </div>
         <div class="content">
             <div class="form-wrapper">
+                {% if success_message %}
+                <div class="success-message">
+                    <p>{{ success_message }}</p>
+                </div>
+                {% endif %}
+                {% if error_message %}
+                <div class="error-message">
+                    <ul>
+                        {% for field, errors in error_message.items %}
+                        {% for error in errors %}
+                        <li>{{ field }}: {{ error }}</li>
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
                 <form id="addPersonForm" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group">
@@ -249,7 +255,6 @@
             </div>
         </div>
     </div>
-</head>
 </body>
-       
-        
+
+</html>
