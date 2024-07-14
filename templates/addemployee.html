@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Recognition System with Smart Attendance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #fff;
+            height: calc(100% - 40px);
+            border-bottom: 1px solid #ccc;
+        }
+
+        .navigation {
+            width: 250px;
+            background: #444;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            border-right: 1px solid #ccc;
+            margin-right: 20px;
+        }
+
+        .navigation button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navigation button i {
+            margin-right: 10px;
+        }
+
+        .navigation button:hover {
+            background: #555;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label,
+        input {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .details {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            border: 4px solid #000;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        .update-button {
+            margin-top: 20px;
+        }
+
+        .update-button {
+            margin-top: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .update-button:hover {
+            background-color: #45a049;
+        }
+
+        .details-container input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        form {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .errorlist {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Facial Recognition System with Smart Attendance</h1>
+    </div>
+    <div class="container">
+        <div class="navigation">
+            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
+                <i class="fas fa-user"></i> Home
+            </button>
+            <button onclick="window.location.href='{% url 'adminprofile' %}'">
+                <i class="fas fa-user"></i> Profile
+            </button>
+            <button onclick="window.location.href='{% url 'addcamerapage' %}'">
+                <i class="fas fa-video"></i> Add Camera
+            </button>
+            <button onclick="window.location.href='{% url 'notifications' %}'">
+                <i class="fas fa-video"></i> Notifications
+            </button>
+            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
+                <i class="fas fa-video"></i> Attendance Report
+            </button>
+            <button onclick="window.location.href='{% url 'tempadmin' %}'">
+                <i class="fas fa-video"></i> Temporary Access
+            </button>
+            <button onclick="window.location.href='{% url 'registeracc' %}'">
+                <i class="fas fa-video"></i> Register Account
+            </button>
+            <button onclick="window.location.href='{% url 'addper' %}'">
+                <i class="fas fa-video"></i> Add Person
+            </button>
+            <button onclick="window.location.href='{% url 'employee_list' %}'">
+                <i class="fas fa-user-plus"></i> Employees List
+            </button>
+            <button onclick="window.location.href='{% url 'loginoptions' %}'">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+        <div class="content">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="errorlist">{{ field.errors }}</div>
+                    {% endif %}
+                {% endfor %}
+                <button type="submit">Add Employee</button>
+
+                {% if success_message %}
+                    <div class="alert alert-success">
+                        {{ success_message }}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

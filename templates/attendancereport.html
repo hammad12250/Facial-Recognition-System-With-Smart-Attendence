@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Recognition System with Smart Attendance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+        /* CSS styles */
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background-color: #fff;
+            height: calc(100% - 40px); /* Subtract header height */
+            border-bottom: 1px solid #ccc; /* Add border at the bottom of the container */
+        }
+
+        .navigation {
+            width: 250px;
+            background: #444; /* Button Color */
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            border-right: 1px solid #ccc;
+            margin-right: 20px; /* Add margin between navigation and live-feed */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navigation button {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #333; /* Button Color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navigation button i {
+            margin-right: 10px;
+        }
+
+        .navigation button:hover {
+            background: #333; /* Darker Button Color on Hover */
+        }
+
+        .content {
+            flex: 1; /* Take remaining vertical space in the container */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Facial Recognition System with Smart Attendance</h1>
+    </div>
+    <div class="container">
+        <div class="navigation">
+            <button onclick="window.location.href='{% url 'adminhomepage' %}'">
+                <i class="fas fa-user"></i> Home</button>
+            <button onclick="window.location.href='{% url 'adminprofile' %}'">
+            <i class="fas fa-user"></i> Profile</button>
+            <button onclick="window.location.href='{% url 'addcamerapage' %}'">
+                <i class="fas fa-video"></i> Add Camera
+            </button>
+            <button onclick="window.location.href='{% url 'notifications' %}'">
+                <i class="fas fa-video"></i> Notifications</button>
+            <button onclick="window.location.href='{% url 'attendancereportadmin' %}'">
+                <i class="fas fa-video"></i> Attendance Report
+            </button>
+            <button onclick="window.location.href='{% url 'tempadmin' %}'">
+                <i class="fas fa-video"></i>Temporary Access</button>
+            <button onclick="window.location.href='{% url 'registeracc' %}'">
+                <i class="fas fa-video"></i> Register Account
+            </button>
+            <button onclick="window.location.href='{% url 'addper' %}'">
+                <i class="fas fa-video"></i> Add Person
+            </button>
+            <button onclick="window.location.href='{% url 'employee_list' %}'">
+                <i class="fas fa-user-plus"></i> Employees List</button>
+            <button onclick="window.location.href='{% url 'loginoptions' %}'">
+            <i class="fas fa-sign-out-alt"></i> Logout</button>
+        </div>
+        <div class="content">
+            <h2>Select date to View Attendance</h2>
+            <form id="attendanceForm" method="POST" action="{% url 'attendancereportadmin' %}">
+                {% csrf_token %}
+                <label for="startDate">Select date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+                <button type="submit">Search</button>
+            </form>
+            <div id="attendanceResult" class="center">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Person ID</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for attendance in attendance_data %}
+                        <tr>
+                            <td>{{ attendance.person_id }}</td>
+                            <td>{{ attendance.date }}</td>
+                            <td>{{ attendance.time }}</td>
+                            <td>{{ attendance.status }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

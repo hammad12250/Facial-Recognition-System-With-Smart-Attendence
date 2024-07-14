@@ -1,0 +1,11 @@
+create a database in xamp with name finalyearproject (dont change name)
+after creating  database import the attached database tables
+after importing refresh your code and xamp
+for admin login 
+username admin
+password Aliraza12
+for guard logins
+id 16
+pass asdf
+
+
